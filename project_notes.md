@@ -26,6 +26,7 @@ http://www.bandsintown.com/api/overview
 ##Example query with multi-artist and radius:
 http get "http://api.bandsintown.com/events/search?api_version=2.0&artists[]=Adele&artists[]=Kiss&location=Seattle,WA&radius=150&format=json&app_id=CHADTEST"
 
+``` json
 HTTP/1.1 200 OK
 Cache-Control: private, max-age=0, must-revalidate
 Connection: keep-alive
@@ -163,7 +164,7 @@ X-Runtime: 33
         }
     }
 ]
-
+```
 --------------------------------------------------------------------------------
 
 ##Example query for an artist by Music Brainz ID
