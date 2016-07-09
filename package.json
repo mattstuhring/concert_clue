@@ -1,1 +1,32 @@
-
+{
+  "name": "concert-clue",
+  "version": "0.1.0",
+  "description": "Website that presents a list of upcoming events for a user's list of favorite artists.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "knex": "knex"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattstuhring/concert-clue.git"
+  },
+  "keywords": [
+    "concerts",
+    "bands",
+    "music",
+    "shows",
+    "musicians"
+  ],
+  "author": "Chad Latham <chadlatham33@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattstuhring/concert-clue/issues"
+  },
+  "homepage": "https://github.com/mattstuhring/concert-clue#readme",
+  "dependencies": {
+    "knex": "^0.11.7",
+    "pg": "^6.0.1"
+  }
+}
