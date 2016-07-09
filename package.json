@@ -26,7 +26,15 @@
   },
   "homepage": "https://github.com/mattstuhring/concert-clue#readme",
   "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.1",
+    "express": "^4.14.0",
+    "express-validation": "^1.0.0",
+    "joi": "^8.4.2",
     "knex": "^0.11.7",
+    "morgan": "^1.7.0",
     "pg": "^6.0.1"
   }
 }
