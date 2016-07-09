@@ -8,6 +8,9 @@
     "start": "node server.js",
     "knex": "knex"
   },
+  "engines": {
+    "node": "6.2.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mattstuhring/concert-clue.git"
