@@ -36,5 +36,10 @@
     "knex": "^0.11.7",
     "morgan": "^1.7.0",
     "pg": "^6.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^2.0.0",
+    "foreman": "^1.4.1",
+    "nodemon": "^1.9.2"
   }
 }
