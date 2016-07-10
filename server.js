@@ -12,8 +12,13 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 
+// create, delete
+const session = require('./routes/session');
+// create, read, update, delete
 const artists = require('./routes/artists');
-const artists_users = require('./routes/artists_users');
+// create, read, update, delete
+const artists_users = require('./routes/artists/users');
+// create, read, update, delete
 const users = require('./routes/users');
 
 const app = express();
@@ -29,14 +34,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cookieSession({
   name: 'concert-clue',
-  secret process.env.SESSION_SECRET
+  secret: process.env.SESSION_SECRET
 }));
 
 app.use(express.static(path.join('public')));
 
-app.use(artists);
-app.use(users);
-app.use(artists_users);
+// app.use(artists);
+// app.use(users);
+// app.use(artists_users);
 
 app.use((_req, res) => {
   res.sendStatus(404);
