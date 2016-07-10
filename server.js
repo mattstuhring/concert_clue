@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'productioin') {
   require('dotenv').config({silent: true});
 };
 
-const express = require('experss');
+const express = require('express');
 const path = require('path');
 const port = process.env.PORT || 8000;
 
