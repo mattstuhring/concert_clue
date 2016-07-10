@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/mattstuhring/concert-clue#readme",
   "dependencies": {
-    "bcrypt": "^0.8.7",
+    "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-alpha.1",
@@ -38,7 +38,8 @@
     "joi": "^8.4.2",
     "knex": "^0.11.7",
     "morgan": "^1.7.0",
-    "pg": "^6.0.1"
+    "pg": "^6.0.1",
+    "request-promise": "^3.0.0"
   },
   "devDependencies": {
     "dotenv": "^2.0.0",
