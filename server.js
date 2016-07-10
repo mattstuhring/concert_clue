@@ -1,6 +1,6 @@
 'use strict'
 
-if (process.env.NODE_ENV !== 'productioin') {
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({silent: true});
 };
 
