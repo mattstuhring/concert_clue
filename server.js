@@ -17,7 +17,7 @@ const session = require('./routes/session');
 // create, read, update, delete
 const artists = require('./routes/artists');
 // create, read, update, delete
-const artists_users = require('./routes/artists/users');
+const artists_users = require('./routes/artists_users');
 // create, read, update, delete
 const users = require('./routes/users');
 
@@ -31,7 +31,7 @@ if(process.env.NODE_ENV !== 'test') {
 };
 
 app.use(bodyParser.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(cookieSession({
   name: 'concert-clue',
   secret: process.env.SESSION_SECRET
@@ -39,6 +39,7 @@ app.use(cookieSession({
 
 app.use(express.static(path.join('public')));
 
+app.use(session);
 // app.use(artists);
 // app.use(users);
 // app.use(artists_users);
