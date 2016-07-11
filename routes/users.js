@@ -20,7 +20,6 @@ router.post('/users', ev(validations.post), (req, res, next) => {
       if(exists) {
         const err = new Error('Username already exists');
         err.status = 401;
-        // err.message = 'Username already exists';
 
         throw err;
       }

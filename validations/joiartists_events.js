@@ -7,7 +7,7 @@ module.exports.get = {
     artists: Joi.array()
       .items(
         Joi.string()
-        .label('mbid')
+        .label('Artist Name')
         .required()
         .trim()
       )
