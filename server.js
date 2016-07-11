@@ -41,7 +41,7 @@ app.use(express.static(path.join('public')));
 
 app.use(session);
 // app.use(artists);
-// app.use(users);
+app.use(users);
 // app.use(artists_users);
 
 app.use((_req, res) => {
