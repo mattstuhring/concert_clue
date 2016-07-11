@@ -1,3 +1,7 @@
 'use strict';
+// IFFE to protect global scope - Must be at top of file.
+(function () {
 
-console.log('index.js');
+
+// End IFFE - Must be at bottom of file.
+})();
