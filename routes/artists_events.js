@@ -6,7 +6,7 @@ const knex = require('../knex');
 const ev = require('express-validation');
 const validations = require('../validations/joiartists_events');
 
-router.get('/artists/events', (req, res, next) => {
+router.get('/artists/events', ev(validations.get), (req, res, next) => {
 
 
 
