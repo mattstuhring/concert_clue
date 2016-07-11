@@ -7,11 +7,15 @@ const bcrypt = require('bcrypt-as-promised');
 const ev = require('experss-validation');
 const validations = require('../validations/joiusers');
 
+
+
+
+
 /*
 post
 
 on initial search do a get request to artists
-  if we do nto have a result in the artists table
+  if we do not have a result in the artists table
 
   node get request to bandsintown for the artist
 
