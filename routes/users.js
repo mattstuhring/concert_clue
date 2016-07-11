@@ -18,8 +18,9 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     .first()
     .then((exists) => {
       if(exists) {
-        const err = new Error();
-        err.status = 400;
+        const err = new Error('Username already exists');
+        err.status = 401;
+        // err.message = 'Username already exists';
 
         throw err;
       }

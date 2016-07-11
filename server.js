@@ -11,6 +11,7 @@ const port = process.env.PORT || 8000;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
+const ev = require('express-validation');
 
 // create, delete
 const session = require('./routes/session');
@@ -49,8 +50,13 @@ app.use((_req, res) => {
 });
 
 app.use((err, _req, res, _next) => {
+  if (err instanceof ev.ValidationError) {
+    return res.status(err.status).json(err);
+  }
+
   if(err.status) {
-    return res.status(err.status).send(err);
+    console.log(err);
+    return res.status(err.status).send(err.message);
   }
 
   console.error(err.stack);
