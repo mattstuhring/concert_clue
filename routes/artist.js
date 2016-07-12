@@ -4,11 +4,13 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
 const ev = require('express-validation');
-const request = require('request-promise');
+const rp = require('request-promise');
 const validations = require('../validations/joiartist');
 
 router.get('/artists', ev(validations.get), (req, res, next) => {
   const { artist } = req.body;
+  const appId = 'CHADTEST';
+  const escArtist = encodeURIComponent(artist);
 
   knex('artists')
     .select()
@@ -20,20 +22,25 @@ router.get('/artists', ev(validations.get), (req, res, next) => {
       }
 
       var options = {
-        uri: '',
-
-        json: true // Automatically parses the JSON string in the response
+        uri: `http://api.bandsintown.com/artists/${escArtist}.json?api_version=2.0&app_id=${appId}`,
+        json: true
       };
 
-      return rp(options);  
+      return rp(options);
     })
-    .then((artist)) {
-      console.log(artist);
-    }
+    .then((artist) => {
+      delete artist.mbid;
+      delete artist.tracker_count;
+      delete artist.upcoming_event_count;
+      return res.send(artist);
+    })
     .catch((err) => {
+      if (err.statusCode === 404) {
+        err.status = 404;
+      }
+
       next(err);
     });
-
 });
 
 module.exports = router;

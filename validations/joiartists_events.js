@@ -11,5 +11,5 @@ module.exports.get = {
         .required()
         .trim()
       )
-  };
+  }
 };

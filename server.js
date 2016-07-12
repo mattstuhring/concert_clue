@@ -16,11 +16,12 @@ const ev = require('express-validation');
 // create, delete
 const session = require('./routes/session');
 // create, read, update, delete
-const artists = require('./routes/artists');
+const artist = require('./routes/artist');
 // create, read, update, delete
-const artists_users = require('./routes/artists_users');
+// const users_artists = require('./routes/users_artists');
 // create, read, update, delete
 const users = require('./routes/users');
+const artists_events = require('./routes/artists_events');
 
 const app = express();
 
@@ -41,9 +42,10 @@ app.use(cookieSession({
 app.use(express.static(path.join('public')));
 
 app.use(session);
-// app.use(artists);
+app.use(artist);
 app.use(users);
-// app.use(artists_users);
+app.use(artists_events);
+// app.use(users_artists);
 
 app.use((_req, res) => {
   res.sendStatus(404);

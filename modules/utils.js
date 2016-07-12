@@ -10,6 +10,7 @@
 const genEventsQuery = function (url, artists, appId, city, state, radius) {
   let query = '';
   let escArtists = '';
+
   for (const artist of artists) {
     escArtists += `&artists[]=${encodeURIComponent(artist)}`;
   }

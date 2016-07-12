@@ -5,7 +5,7 @@ const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
 const ev = require('express-validation');
-const validations = require('../validations/joiartists_users');
+// const validations = require('../validations/joiusers_artists');
 
 //
 // post
@@ -22,7 +22,7 @@ const validations = require('../validations/joiartists_users');
 router.get('/users/artists', (req, res, next) => {
   // get all artist that a user has in their favorites
   // database results in an array of artists
-  // 
+  //
 });
 
 
