@@ -1,3 +1,2 @@
 'use strict';
-
-console.log('main.js');
+ $(".button-collapse").sideNav();

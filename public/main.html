@@ -17,8 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body>
-    <!-- fixed navbar -->
-    <div class="navbar-fixed">
+
+    <div class="navbar-fixed">     <!-- fixed navbar -->
       <nav class="blue">
         <div class="nav-wrapper">
           <a href="#!" class="brand-logo">Concert Clue</a>
@@ -27,25 +27,92 @@
           </ul>
         </div>
       </nav>
-    </div>
+    </div> <!-- end navbar -->
 
-    <div class="container">
-      <div class="nav-wrapper">
-        <div class="row">
-          <div class="col s12">
+    <div> <!-- begin main section -->
+      <div class="row">
+        <div class ="col s3">
+          <div class="collection with-header">
+            <section class="collection-header"><h4>Favorite Artist</h4></section>
+            <a href="#!" class="collection-item">Alvin</a>
+            <a href="#!" class="collection-item active">Simon</a>
+            <a href="#!" class="collection-item">Theodore</a>
+            <a href="#!" class="collection-item">Chip</a>
+          </div>
+        </div>
+        <div class="col s9">
+          <div class="row"> <!-- begin search -->
             <form>
-              <div class="input-field">
+              <div class="input-field col s7 offset-s1">
                 <input id="search" type="search" required>
                 <label for="search"><i class="material-icons">search</i></label>
                 <i class="material-icons">close</i>
               </div>
+              <button class="btn-large waves-effect col s2 offset-2 waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
             </form>
-          </div>
+          </div> <!-- end search -->
+          <div class="divider"></div>
+          <div class="section">
+          <h5>Artist</h5>
+        </div>
+          <div class="row"> <!-- begin search response card row -->
+            <div class="col s9"> <!-- begin card -->
+              <div class="card">
+                <div class="row">
+                  <div class="col s4">
+                    <div class="card-image">
+                      <img src="https://s3.amazonaws.com/bit-photos/thumb/6115532.jpeg">
+                      <span class="card-title">Adele Ipsum</span>
+                    </div>
+                  </div>
+                  <div class="col s8">
+                    <div class="card-content">
+                      <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">Add to Favorites</a>
+                      <a href="#">Show events</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  <!-- end card -->
+
+          </div>  <!-- end search response card row-->
+          <div class="divider"></div>
+          <div class="section">
+          <h5>Upcoming Shows</h5>
+        </div>
+          <div class="row"> <!-- begin events card row -->
+            <div class="col s10">     <!-- begin card -->
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">title</span>
+                  <p>description</p>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">formatted_datetime</a>
+                    <a href="#">facebook_tour_dates_url</a>
+                  </div>
+                </div>
+              </div> <!-- end card -->
+              <div class="col s10">     <!-- begin card -->
+                <div class="card blue-grey darken-1">
+                  <div class="card-content white-text">
+                    <span class="card-title">Nas @ UB Stadium in Buffalo, NY</span>
+                    <p>Description: 2011 Block party: featuring Kid Cudi, Damian Marley, Nas & Spec. Guest</p>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">Friday, April 29, 2011 at 7:00pm</a>
+                    <a href="http://www.bandsintown.com/Skrillex/facebookapp?came_from=67">Tickets</a>
+                  </div>
+                </div>
+          </div>  <!-- end events card row-->
         </div>
       </div>
-    </div>
-
-
+    </div> <!-- end main section -->
 
 
     <!--Import jQuery before materialize.js-->
