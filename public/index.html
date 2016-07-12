@@ -17,49 +17,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body>
-    <!-- fixed navbar -->
-    <div class="navbar-fixed">
-      <nav class="blue">
-        <div class="nav-wrapper">
-          <a href="#!" class="brand-logo">Concert Clue</a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="index.html">Login</a></li>
-            <li><a href="index.html">Signup</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">Concert Clue</a>
+        <ul class="right hide-on-med-and-down">
 
-    <!-- input form -->
-    <div class="container concert_image">
-      <div class="row search_input">
-        <form class="col s11 offset-s1">
-          <div class="row white search-bar">
-            <div class="input-field col s4">
-              <input placeholder="enter artist" id="artist" type="text" class="validate">
-              <label for="first_name">Artist</label>
-            </div>
-            <div class="input-field col s3">
-              <input placeholder="enter city" id="city" type="text" class="validate">
-              <label for="city">City</label>
-            </div>
-            <div class="input-field col s2">
-              <input placeholder="enter state" id="state" type="text" class="validate">
-              <label for="state">State</label>
-            </div>
-            <div class="input-field col s3">
-              <button class="btn-large waves-effect waves-light" type="submit" name="action">Search
-                <i class="material-icons right">search</i>
-              </button>
+          <!-- Modal Trigger -->
+          <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Login</a></li>
+
+          <!-- Modal Trigger -->
+          <li><a class="waves-effect waves-light btn modal-trigger" href="#modal2">Signup</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="index-banner" class="parallax-container">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <br><br>
+          <h1 class="header center teal-text text-lighten-2">Welcome to Concert Clue</h1>
+          <div class="row search-bar">
+            <div class="col s12">
+              <form>
+                <div class="row white search-bar">
+                  <div class="input-field col s6">
+                    <input id="artist" type="text" class="validate black-text">
+                    <label for="first_name">Artist</label>
+                  </div>
+                  <div class="input-field col s4">
+                    <input id="city" type="text" class="validate black-text">
+                    <label for="city">City</label>
+                  </div>
+                  <div class="input-field col s2">
+                    <input id="state" type="text" class="validate black-text">
+                    <label for="state">State</label>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </form>
+          <div class="row center">
+            <a href="#" class="btn-large waves-effect waves-light teal lighten-1">search</a>
+          </div>
+          <br><br>
+        </div>
+      </div>
+      <div class="parallax">
+        <img src="../images/concert.jpg" alt="Unsplashed background img 1">
+      </div>
+    </div>
+
+    <h2 class="center">Upcoming Shows</h2>
+    <div class="divider"></div>
+    <div class="container">
+      <div class="section parallax-container valign-wrapper">
+
+
+      </div>
+    </div>
+
+    <footer class="page-footer teal">
+      <div class="footer-copyright">
+        <div class="container">
+        Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal Structure Nav-bar -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Login</h4>
+        <p>
+          <form>
+            <div class="row input-field col s12">
+              <input id="username" type="text" class="validate">
+              <label for="username">Username</label>
+            </div>
+            <div class="row input-field col s12">
+              <input id="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+          </form>
+        </p>
+      </div>
+    </div>
+
+    <!-- Modal Structure Nav-bar -->
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <h4>Signup</h4>
+        <p>
+          <form>
+            <div class="row input-field col s12">
+              <input id="username" type="text" class="validate">
+              <label for="username">Username</label>
+            </div>
+            <div class="row input-field col s12">
+              <input id="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+            <div class="row input-field col s12">
+              <input id="city" type="text" class="validate">
+              <label for="city">City</label>
+            </div>
+            <div class="row input-field col s12">
+              <input id="state" type="text" class="validate">
+              <label for="state">State</label>
+            </div>
+            <div class="input-field col s12">
+              <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+                <option value="125">125</option>
+                <option value="150">150</option>
+              </select>
+              <label>Radius(miles)</label>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+          </form>
+        </p>
       </div>
     </div>
 
 
     <!--Import jQuery before materialize.js-->
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
   </body>

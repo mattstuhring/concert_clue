@@ -1,23 +1,52 @@
-.search_input {
-  margin-top: 50px;
+nav ul a,
+nav .brand-logo {
+  color: #444;
 }
-.brand-logo {
-  margin-left: 10px;
+
+p {
+  line-height: 2rem;
 }
-.concert_image {
-  background: url('../images/concert.jpg');
-  background-size: cover;
-  height: 450px;
-}
-.btn-large {
-  margin-left: 4rem;
-}
-.input-field {
-  margin-left: 6rem;
+
+.button-collapse {
+  color: #26a69a;
 }
 .search-bar {
-  margin-top: 180px;
+  border-radius: 5px;
 }
-.container .row {
-  margin-right: 2.25rem;
+.parallax-container {
+  min-height: 600px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+
+.parallax-container .section {
+  width: 100%;
+}
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
 }
