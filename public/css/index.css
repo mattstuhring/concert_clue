@@ -1,7 +1,23 @@
 .search_input {
   margin-top: 50px;
 }
-
 .brand-logo {
   margin-left: 10px;
+}
+.concert_image {
+  background: url('../images/concert.jpg');
+  background-size: cover;
+  height: 450px;
+}
+.btn-large {
+  margin-left: 4rem;
+}
+.input-field {
+  margin-left: 6rem;
+}
+.search-bar {
+  margin-top: 180px;
+}
+.container .row {
+  margin-right: 2.25rem;
 }
