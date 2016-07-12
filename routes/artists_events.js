@@ -6,8 +6,9 @@ const knex = require('../knex');
 const ev = require('express-validation');
 const validations = require('../validations/joiartists_events');
 const genEventsQuery = require('../modules/utils').genEventsQuery;
-var rp = require('request-promise');
+const rp = require('request-promise');
 
+// Req.body should contain: a property called artists which is an array of artist names; optionally city, state, and radius all at once or not at all.
 router.get('/artists/events', ev(validations.get), (req, res, next) => {
   const { artists, city, state, radius } = req.body;
   const eventsURL = 'http://api.bandsintown.com/events/search?api_version=2.0';
@@ -35,7 +36,7 @@ console.log(options);
 
         throw err;
       }
-      
+
       return res.send(events);
     })
     .catch((err) => {
@@ -49,13 +50,3 @@ console.log(options);
 
 
 module.exports = router;
-
-/* handling get request to ./artists/events
-
-A properly formed get request to /artist/events must be an array of artists names in the body and city, state, and radius.
-
-The body will simply JSON.parse()  it will be a jsonrequest as the body.  we'll do some stringifcation and
-
-if we don't receive a properly formed body in the request, we'll respond with a 401 error.
-
-*/

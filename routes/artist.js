@@ -7,6 +7,7 @@ const ev = require('express-validation');
 const rp = require('request-promise');
 const validations = require('../validations/joiartist');
 
+// Req body must have a single property called artist with an artist name string
 router.get('/artists', ev(validations.get), (req, res, next) => {
   const { artist } = req.body;
   const appId = 'CHADTEST';
@@ -44,5 +45,3 @@ router.get('/artists', ev(validations.get), (req, res, next) => {
 });
 
 module.exports = router;
-
-// Request body must be a single property called artist w an artist name

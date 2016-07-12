@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt-as-promised');
 const ev = require('express-validation');
 const validations = require('../validations/joiusers');
 
-
+// Req.body must contain user_name, password, city, state, and radius.
 router.post('/users', ev(validations.post), (req, res, next) => {
   const newUser = req.body;
   const { user_name, password } = newUser;
