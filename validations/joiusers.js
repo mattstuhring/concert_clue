@@ -5,8 +5,10 @@ const Joi = require('joi');
 module.exports.post = {
   body: {
     user_name: Joi.string()
-      .label('Username')
+      .label('User_name')
       .required()
+      .min(6)
+      .max(255)
       .trim(),
 
     password: Joi.string()

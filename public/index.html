@@ -22,11 +22,11 @@
         <a id="logo-container" href="#" class="brand-logo">Concert Clue</a>
         <ul class="right hide-on-med-and-down">
 
-          <!-- Modal Trigger -->
-          <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Login</a></li>
+          <!-- Modal Trigger Login -->
+          <li><a class="waves-effect waves-light btn modal-trigger login" href="#modal1">Login</a></li>
 
-          <!-- Modal Trigger -->
-          <li><a class="waves-effect waves-light btn modal-trigger" href="#modal2">Signup</a></li>
+          <!-- Modal Trigger Signup -->
+          <li><a class="waves-effect waves-light btn modal-trigger signup" href="#register-user">Signup</a></li>
         </ul>
       </div>
     </nav>
@@ -42,15 +42,15 @@
                 <div class="row artist-bar white">
                   <div class="input-field col s6">
                     <input id="artist" type="text" class="validate black-text">
-                    <label for="first_name">Artist</label>
+                    <label for="artist">Artist</label>
                   </div>
                   <div class="input-field col s4">
-                    <input id="city" type="text" class="validate black-text">
-                    <label for="city">City</label>
+                    <input id="city-search" type="text" class="validate black-text">
+                    <label for="city-search">City</label>
                   </div>
                   <div class="input-field col s2">
-                    <input id="state" type="text" class="validate black-text">
-                    <label for="state">State</label>
+                    <input id="state-search" type="text" class="validate black-text">
+                    <label for="state-search">State</label>
                   </div>
                 </div>
               </form>
@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="parallax">
-        <img src="../public/images/concert.jpg" alt="Unsplashed background img 1">
+        <img src="../images/concert.jpg" alt="Unsplashed background img 1">
       </div>
     </div>
 
@@ -88,7 +88,7 @@
     </div>
 
     <div id="top" class="page-footer">
-      <div><img class="responsive-img" src="../public/images/crowd.jpg"/></div>
+      <div><img class="responsive-img" src="../images/crowd.jpg"/></div>
     </div>
 
     <!-- Modal Structure Nav-bar -->
@@ -98,12 +98,12 @@
         <p>
           <form>
             <div class="row input-field col s12">
-              <input id="username" type="text" class="validate">
-              <label for="username">Username</label>
+              <input id="username-login" type="text" class="validate">
+              <label for="username-login">Username</label>
             </div>
             <div class="row input-field col s12">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
+              <input id="password-login" type="password" class="validate">
+              <label for="password-login">Password</label>
             </div>
             <button class="btn waves-effect waves-light" type="submit" name="action">Submit
               <i class="material-icons right">send</i>
@@ -113,31 +113,89 @@
       </div>
     </div>
 
-    <!-- Modal Structure Nav-bar -->
-    <div id="modal2" class="modal">
+    <!-- Modal Structure Nav-bar Signup -->
+    <div id="register-user" class="modal bottom-sheet">
       <div class="modal-content">
         <h4>Signup</h4>
-        <p>
-          <form>
-            <div class="row input-field col s12">
+        <div class="row">
+          <form class="col s12">
+            <div class="input-field col s6">
               <input id="username" type="text" class="validate">
               <label for="username">Username</label>
             </div>
-            <div class="row input-field col s12">
+            <div class="input-field col s6">
               <input id="password" type="password" class="validate">
               <label for="password">Password</label>
             </div>
-            <div class="row input-field col s12">
+            <div class="input-field col s6">
               <input id="city" type="text" class="validate">
               <label for="city">City</label>
             </div>
-            <div class="row input-field col s12">
+            <!-- <div class="row input-field col s12">
               <input id="state" type="text" class="validate">
               <label for="state">State</label>
+            </div> -->
+            <div class="input-field col s6">
+              <!-- <i class="material-icons prefix">landscape</i> -->
+              <select id="state">
+                <!-- <option value="" disabled selected>Select your search radius</option> -->
+                <option id="exclude" value="" disabled selected>Select your state</option>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+              </select>
+              <label>State</label>
             </div>
             <div class="input-field col s12">
-              <select>
-                <option value="" disabled selected>Choose your option</option>
+              <select id="radius">
+                <option value="" disabled selected>Select your search radius</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
                 <option value="75">75</option>
@@ -145,19 +203,20 @@
                 <option value="125">125</option>
                 <option value="150">150</option>
               </select>
-              <label>Materialize Select</label>
+              <label>Radius (miles)</label>
             </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <!-- <button class="btn waves-effect waves-light" type="submit" name="action">Submit
               <i class="material-icons right">send</i>
-            </button>
+            </button> -->
           </form>
-        </p>
+          <a href="#!" class="modal-action btn waves-effect waves-light">Register<i class="material-icons right">send</i></a>
+        </div>
       </div>
     </div>
 
 
     <!--Import jQuery before materialize.js-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
   </body>
