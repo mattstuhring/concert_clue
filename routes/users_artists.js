@@ -50,6 +50,7 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
   const userId = req.session.userId;
   const { mbid } = req.body;
   let updateArtistId;
+  let artistResult;
 
   knex('artists')
     .select()
@@ -105,22 +106,44 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
         }, "*")
     })
     .then((artists) => {
-      delete artists[0].created_at;
-      delete artists[0].id;
-      delete artists[0].updated_at;
-
-      return res.send(artists[0]);
+      return artists[0];
     })
     .catch((err) => {
       if (err.artist) {
-        delete err.artist.created_at;
-        delete err.artist.id;
-        delete err.artist.updated_at;
 
-        return res.send(err.artist);
+        return err.artist
       }
 
       throw err;
+    })
+    .then((artist) => {
+      artistResult = artist;
+      return knex('artists_users')
+        .select()
+        .where('user_id', userId)
+        .andWhere('artist_id', artist.id)
+    })
+    .then((favorites) => {
+      if (favorites.length > 0) {
+        const err = new Error();
+
+        err.status = 400;
+
+        throw err;
+      }
+
+      return knex('artists_users')
+        .insert({
+          user_id: userId,
+          artist_id: artistResult.id
+        });
+    })
+    .then(() => {
+      delete artistResult.created_at;
+      delete artistResult.id;
+      delete artistResult.updated_at;
+
+      return res.send(artistResult);
     })
     .catch((err) => {
       next(err);

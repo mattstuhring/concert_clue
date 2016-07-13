@@ -227,4 +227,6 @@ http get :8000/users/artists "cookie: loggedIn=true; concert-clue=eyJ1c2VySWQiOj
 userId 4: stantheman login:
 http get :8000/users/artists "cookie: loggedIn=true; concert-clue=eyJ1c2VySWQiOjR9; concert-clue.sig=8bdtpf6MPoQvfPgESSNMznUostU;"
 
+To post to Mudvayne to a logged in user
 Mudvayne mbid = f1c8da15-b408-4149-b863-f1cbe9971f19
+http post :8000/users/artists mbid=f1c8da15-b408-4149-b863-f1cbe9971f19 "cookie: loggedIn=true; concert-clue=eyJ1c2VySWQiOjN9; concert-clue.sig=0f3myt26O4Bhew9KwAAdK8DWYS8;"
