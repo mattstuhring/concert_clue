@@ -194,7 +194,7 @@ X-Runtime: 17
 --------------------------------------------------------------------------------
 
 --- The artists search will only EVER return 1 artist or empty.
-HTTP GET "http://api.bandsintown.com/artists/Ni.json?api_version=2.0&app_id=CHADTEST"
+HTTP GET "http://api.bandsintown.com/artists/Boston.json?api_version=2.0&app_id=CHADTEST"
 
 --------------------------------------------------------------------------------
 

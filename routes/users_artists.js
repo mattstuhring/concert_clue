@@ -45,7 +45,7 @@ router.get('/users/artists', checkAuth, (req, res, next) => {
 // Req.body should contain 1 property called mbid which is a string - the music brainz id of the artist.
 // if the artist is in the local db and updated within the last 24 hours then
 // route returns the local db copy. Otherwise it queries bandsintown and inserts
-// or updates the record in the local db then returns.
+// or updates the record in the local db then adds to the artists_users table then returns the artist.
 router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
   const userId = req.session.userId;
   const { mbid } = req.body;
