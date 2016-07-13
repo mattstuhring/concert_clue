@@ -195,3 +195,36 @@ X-Runtime: 17
 
 --- The artists search will only EVER return 1 artist or empty.
 HTTP GET "http://api.bandsintown.com/artists/Ni.json?api_version=2.0&app_id=CHADTEST"
+
+--------------------------------------------------------------------------------
+
+--- Natasha Example testing logged in session
+http :8000/player/ "cookie: loggedIn=true; paddles=eyJ1c2VySWQiOjEsImxlYWd1ZUlkIjoxfQ==; paddles.sig=jaZXHZ30Fe9oM3FK72gcAjfth8Q;"
+
+http post :8000/session username=chadlatham password=test1234
+
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 2
+Content-Type: text/plain; charset=utf-8
+Date: Tue, 12 Jul 2016 19:36:41 GMT
+ETag: W/"2-4KoCHiHd29bYzs7HHpz1ZA"
+Set-Cookie: loggedIn=true; Path=/
+Set-Cookie: concert-clue=eyJ1c2VySWQiOjJ9; path=/; httponly
+Set-Cookie: concert-clue.sig=roA-M-3KAIsLOQZcv7E8dfwGtJg; path=/; httponly
+
+OK
+
+userId 1: mattstuhring login:
+http get :8000/users/artists "cookie: loggedIn=true; concert-clue=eyJ1c2VySWQiOjF9; concert-clue.sig=H9zBuK0OsCusQ5wJhUYdTZbFLXA;"
+
+userId 2 chadlatham login:
+http get :8000/users/artists "cookie: loggedIn=true; concert-clue=eyJ1c2VySWQiOjJ9; concert-clue.sig=roA-M-3KAIsLOQZcv7E8dfwGtJg;"
+
+userId 3: setfloat login:
+http get :8000/users/artists "cookie: loggedIn=true; concert-clue=eyJ1c2VySWQiOjN9; concert-clue.sig=0f3myt26O4Bhew9KwAAdK8DWYS8;"
+
+userId 4: stantheman login:
+http get :8000/users/artists "cookie: loggedIn=true; concert-clue=eyJ1c2VySWQiOjR9; concert-clue.sig=8bdtpf6MPoQvfPgESSNMznUostU;"
+
+Mudvayne mbid = f1c8da15-b408-4149-b863-f1cbe9971f19

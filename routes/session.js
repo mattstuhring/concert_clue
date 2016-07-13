@@ -24,11 +24,12 @@ router.post('/session', ev(validations.post), (req, res, next) => {
 
       user = userRow;
       const hashed_password = user.hashed_password;
-      
+
       return bcrypt.compare(password, hashed_password);
     })
     .then(() => {
       req.session.userId = user.id;
+      res.cookie('loggedIn', true);
       res.sendStatus(200);
     })
     .catch(bcrypt.MISMATCH_ERROR, () => {

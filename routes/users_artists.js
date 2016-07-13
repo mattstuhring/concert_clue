@@ -5,52 +5,122 @@ const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
 const ev = require('express-validation');
-// const validations = require('../validations/joiusers_artists');
+const val = require('../validations/joiusers_artists');
+const rp = require('request-promise');
 
-//
-// post
-//
-// handling the submit of the add searched artist to favorite list
-//
-// receive artist name from the submit and add it to the body.
-//
-// Take the name from the body and put it in the artists_users as a new artist id saved in there all savey like.
-//
-// respond with appropriate error or completion messages.
-//
-// have the artists list on the side refresh and show the new artist as added.
-router.get('/users/artists', (req, res, next) => {
-  // get all artist that a user has in their favorites
-  // database results in an array of artists
-  //
-});
+const appId = 'CHADTEST';
+const prefix = 'http://api.bandsintown.com/artists/mbid_';
+const suffix = '?api_version=2.0&format=json&app_id=';
 
+const checkAuth = function(req, res, next) {
+  if (!Number.parseInt(req.session.userId)) {
+    const err = new Error();
 
-router.post('/users/artists/:artist_id', ev(validations.post), (req, res, next) => {
-  const user_id = req.session.user_id;
-  const artist_id = req.params.artist_id;
+    err.status = 401;
+
+    return next(err);
+  }
+
+  next();
+}
+
+// Get all artists that a user has in their favorites - responds with an array of artist objects or an empty array
+// Only triggered on users's login or page refresh?
+router.get('/users/artists', checkAuth, (req, res, next) => {
+  const userId = Number.parseInt(req.session.userId);
 
   knex('artists_users')
-    .select(knex.raw('1=1'))
-    .where('artist_id', artist_id)
-    .first()
-    .then((exists) => {
-      if (exists) {
-        const err = new Error('Artist already exists');
-        err.status = 400; //bad request
+    .select('mbid', 'name', 'image_url', 'thumb_url', 'facebook_page_url', 'facebook_tour_dates_url')
+    .where('user_id', userId)
+    .innerJoin('artists', 'artists_users.artist_id', 'artists.id')
+    .then((favorites) => {
+      return res.send(favorites);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
-        throw err;
+// Handling the submit of the add searched artist to favorite list
+// Req.body should contain 1 property called mbid which is a string - the music brainz id of the artist.
+// if the artist is in the local db and updated within the last 24 hours then
+// route returns the local db copy. Otherwise it queries bandsintown and inserts
+// or updates the record in the local db then returns.
+router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
+  const userId = req.session.userId;
+  const { mbid } = req.body;
+  let updateArtistId;
+
+  knex('artists')
+    .select()
+    .where('mbid', mbid)
+    .first()
+    .then((artist) => {
+      if (artist) {
+        const artistDate = new Date(artist.updated_at);
+        const date = new Date();
+
+        // if the artistDate is less than 1 day old then send the artist
+        if (date - artistDate < 1000 * 60 * 60 * 24) {
+          const err = new Error();
+
+          err.artist = artist;
+          throw err;
+        }
+
+        // mark flag to update artist in local db.
+        updateArtistId = artist.id;
       }
 
-      return knex('artists_users')
+      const options = {
+        uri: `${prefix}${mbid}${suffix}${appId}`,
+        json: true
+      };
+
+      return rp(options);
+    })
+    .then((artist) => {
+      if (updateArtistId) {
+        return knex('artists')
+          .update({
+            mbid: artist.mbid,
+            name: artist.name,
+            image_url: artist.image_url,
+            thumb_url: artist.thumb_url,
+            facebook_page_url: artist.facebook_page_url,
+            facebook_tour_dates_url: artist.facebook_tour_dates_url,
+            updated_at: new Date()
+          }, "*")
+          .where('id', updateArtistId)
+      }
+
+      return knex('artists')
         .insert({
-          artist_id: artist_id,
-          user_id: user_id
-        }, '*')
-        .then((results) => {
-          // Push the new favorite artist into the array
-          return res.status(200);
-        });
+          mbid: artist.mbid,
+          name: artist.name,
+          image_url: artist.image_url,
+          thumb_url: artist.thumb_url,
+          facebook_page_url: artist.facebook_page_url,
+          facebook_tour_dates_url: artist.facebook_tour_dates_url
+        }, "*")
+    })
+    .then((artists) => {
+      delete artists[0].created_at;
+      delete artists[0].id;
+      delete artists[0].updated_at;
+
+      return res.send(artists[0]);
+    })
+    .catch((err) => {
+      if (err.artist) {
+        delete err.artist.created_at;
+        delete err.artist.id;
+        delete err.artist.updated_at;
+
+        return res.send(err.artist);
+      }
+
+      throw err;
     })
     .catch((err) => {
       next(err);
@@ -58,18 +128,3 @@ router.post('/users/artists/:artist_id', ev(validations.post), (req, res, next) 
 });
 
 module.exports = router;
-
-
-
-
-// get artists/users
-//
-// no body
-//
-// only triggered on users's login or page refresh.
-//
-// on login populate list of favorite artists.
-//
-// respond with the list as well as status code.
-//
-// list will include mbid's even though they won't be displayed.

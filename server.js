@@ -7,19 +7,16 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express');
 const path = require('path');
 const port = process.env.PORT || 8000;
-
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
 const ev = require('express-validation');
 
-// create, delete
+// Middleware
+const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
+
+// Routes
 const session = require('./routes/session');
-// create, read, update, delete
 const artist = require('./routes/artist');
-// create, read, update, delete
-// const users_artists = require('./routes/users_artists');
-// create, read, update, delete
+const users_artists = require('./routes/users_artists');
 const users = require('./routes/users');
 const artists_events = require('./routes/artists_events');
 
@@ -33,7 +30,6 @@ if(process.env.NODE_ENV !== 'test') {
 };
 
 app.use(bodyParser.json());
-// app.use(cookieParser());
 app.use(cookieSession({
   name: 'concert-clue',
   secret: process.env.SESSION_SECRET
@@ -45,7 +41,7 @@ app.use(session);
 app.use(artist);
 app.use(users);
 app.use(artists_events);
-// app.use(users_artists);
+app.use(users_artists);
 
 app.use((_req, res) => {
   res.sendStatus(404);
@@ -57,8 +53,17 @@ app.use((err, _req, res, _next) => {
   }
 
   if(err.status) {
-    console.log(err);
-    return res.status(err.status).send(err.message);
+    return res
+      .status(err.status)
+      .set('Content-Type', 'plain/text')
+      .send(err.message);
+  }
+
+  if(err.statusCode) {
+    return res
+      .status(err.statusCode)
+      .set('Content-Type', 'plain/text')
+      .send(err.message);
   }
 
   console.error(err.stack);

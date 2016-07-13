@@ -26,7 +26,7 @@ router.get('/artists/events', ev(validations.get), (req, res, next) => {
     uri: genEventsQuery(eventsURL, artists, appId, city, state, radius),
     json: true
   };
-console.log(options);
+
   rp(options)
     .then((events) => {
       if (events.length === 0) {

@@ -2,14 +2,12 @@
 
 const Joi = require('joi');
 
-module.exports.get = {
+module.exports.post = {
   body: {
-    artists: Joi.array()
-      .items(
-        Joi.string()
-        .label('Artist Name')
-        .required()
-        .trim()
-      )
+    mbid: Joi.string()
+      .label('Mbid')
+      .required()
+      .length(36)
+      .trim()
   }
 };
