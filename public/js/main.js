@@ -12,16 +12,17 @@
 
 
 
+
   let searchCount = 0;
 
   $('.searchSubmit').submit((event) => {
-
+    console.log('hello');
     let $xhr = $.ajax({
       method: 'GET',  // GET is default
       url: '/artists',
       dataType: 'json',
       data: {
-        artist.name: $('#search').val().trim(),
+        name: $('#search').val().trim(),
         city: session.user.city,
         state: session.user.state,
         radius: session.user.radius
@@ -151,12 +152,29 @@
   })
 
 
-
-
-
-
 // End IFFE - Must be at bottom of file.
 
 
 
 })();
+
+
+
+$('favart').click((event) => {
+
+  $('favart').children().remove();
+  $('favart').append(`<h4 class="collection-header favarttop">Favorite Artist</h4>`);
+  $('favarttop').append(() => {
+    ourray = array we receive
+
+    for (let i = 0; i < ourray.length; i++){
+      $('favarttop').append(`<a href="${TBD}" class="collection-item">${ourray[i].name}</a>`);
+    }
+  });
+
+});
+
+
+
+
+`<a href="${TBD}" class="collection-item">${ArtistName}</a>`
