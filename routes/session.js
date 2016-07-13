@@ -46,6 +46,7 @@ router.post('/session', ev(validations.post), (req, res, next) => {
 
 router.delete('/session', (req, res) => {
   req.session = null;
+  res.clearCookie('loggedIn');
   res.sendStatus(200);
 });
 
