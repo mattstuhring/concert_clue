@@ -1,3 +1,9 @@
+
+
+html, body {
+  height: 100%;
+}
+
 nav ul a,
 nav .brand-logo {
   color: #444;
@@ -10,7 +16,7 @@ p {
 .button-collapse {
   color: #26a69a;
 }
-.search-bar {
+.artist-bar {
   border-radius: 5px;
 }
 .parallax-container {
@@ -49,4 +55,12 @@ p {
 
 footer.page-footer {
   margin: 0;
+}
+#top {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   z-index:300;
+   display: none;
 }

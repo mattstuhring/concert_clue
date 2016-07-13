@@ -36,10 +36,10 @@
         <div class="container">
           <br><br>
           <h1 class="header center teal-text text-lighten-2">Welcome to Concert Clue</h1>
-          <div class="row search-bar">
+          <div class="row">
             <div class="col s12">
               <form>
-                <div class="row white search-bar">
+                <div class="row artist-bar white">
                   <div class="input-field col s6">
                     <input id="artist" type="text" class="validate black-text">
                     <label for="first_name">Artist</label>
@@ -57,13 +57,13 @@
             </div>
           </div>
           <div class="row center">
-            <a href="#" class="btn-large waves-effect waves-light teal lighten-1">search</a>
+            <a href="#" class="btn-large waves-effect waves-light teal lighten-1">search<i class="material-icons right">search</i></a>
           </div>
           <br><br>
         </div>
       </div>
       <div class="parallax">
-        <img src="../images/concert.jpg" alt="Unsplashed background img 1">
+        <img src="../public/images/concert.jpg" alt="Unsplashed background img 1">
       </div>
     </div>
 
@@ -71,18 +71,25 @@
     <div class="divider"></div>
     <div class="container">
       <div class="section parallax-container valign-wrapper">
-
-
+        <!-- <div class="col">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Card Title</span>
+              <p>I am a very simple card. I am good at containing small bits of information.
+                I am convenient because I require little markup to use effectively.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
 
-    <footer class="page-footer teal">
-      <div class="footer-copyright">
-        <div class="container">
-        Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-        </div>
-      </div>
-    </footer>
+    <div id="top" class="page-footer">
+      <div><img class="responsive-img" src="../public/images/crowd.jpg"/></div>
+    </div>
 
     <!-- Modal Structure Nav-bar -->
     <div id="modal1" class="modal">
@@ -138,7 +145,7 @@
                 <option value="125">125</option>
                 <option value="150">150</option>
               </select>
-              <label>Radius(miles)</label>
+              <label>Materialize Select</label>
             </div>
             <button class="btn waves-effect waves-light" type="submit" name="action">Submit
               <i class="material-icons right">send</i>
