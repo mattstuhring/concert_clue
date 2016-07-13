@@ -41,10 +41,12 @@
           </div>
         </div>
         <div class="col s9">
+          <div class="section">
+        </div>
           <div class="row"> <!-- begin search -->
             <form class="searchSubmit">
               <div class="input-field col s7 offset-s1">
-                <input id="search" type="search" required>
+                <input id="search" placeholder="Search an artist to find a show near you" type="search" required>
                 <label for="search"><i class="material-icons">search</i></label>
                 <i class="material-icons">close</i>
               </div>
@@ -53,13 +55,15 @@
               </button>
             </form>
           </div> <!-- end search -->
-          <div class="divider"></div>
-          <div class="section">
-          <h5>Artist</h5>
-        </div>
-          <div class="row searchResponseCard"> <!-- begin search response card row -->
+          <div class="divider artistFixture"></div>
+          <div class="section">  <!-- del w SC -->
+          <h5>Artist</h5> <!-- del w SC -->
+        </div> <!-- del w SC -->
+          <div class="row searchResponseCard"> <!-- begin search response card row --> <!-- del w SC -->
+
+            <!-- begin card -->
             <div class="col s9">
-              <div class="card"> <!-- begin card -->
+              <div class="card">
                 <div class="row">
                   <div class="col s4">
                     <div class="card-image">
@@ -77,10 +81,11 @@
                     </div>
                   </div>
                 </div>
-              </div> <!-- end card -->
+              </div>
             </div>
+            <!-- end card -->
 
-          </div>  <!-- end search response card row-->
+          </div>  <!-- end search response card row del w SC-->
           <div class="divider"></div>
           <div class="section">
           <h5>Upcoming Shows</h5>
@@ -113,7 +118,6 @@
         </div>
       </div>
     </div> <!-- end main section -->
-
 
     <!--Import jQuery before materialize.js-->
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>

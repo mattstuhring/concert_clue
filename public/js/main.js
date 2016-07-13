@@ -3,6 +3,14 @@
 
   $(".button-collapse").sideNav();
 
+
+  let firstSearch = function{$('.artistFixture').append(`<div class="section">
+  <h5>Artist</h5>
+  </div>
+  <div class="row searchResponseCard">
+  </div>`)};
+
+
   let searchAddCard = function {$('.searchResponseCard').append(`
     <div class="col s9">
     <div class="card">
@@ -27,50 +35,84 @@
     </div>`
   )};
 
-$('.searchSubmit').submit((event) => {
+  let searchCount = 0;
+
+  $('.searchSubmit').submit((event) => {
+
+    let $xhr = $.ajax({
+      method: 'GET',  // GET is default
+      url: '/artists',
+      dataType: 'json',
+      data: {
+        artist: $('#search').val().trim(),
+        city: ,
+        state: ,
+        radius:
+      }
+    });
+
+    $xhr.done(function(potato) {
+      if ($xhr.status !== 200) {
+
+        return Materialize.toast('Could not locate Artist, try again');
+      }
+      const artistThumb = potato.thumb_url;
+      const artistName = potato.name
+      const artistDescription = potato.weneedtodecidethis
+      const addToFavorites = null;
+      const upcomingShows = facebook_tour_dates_url;
+
+      if searchCount = 0 {
+        firstSearch();
+        searchCount += 1;
+      }
+
+      return searchAddCard(potato);
 
 
-let $xhr = $.ajax({
-  method: 'GET',  // GET is default
-  url: '/artists',
-  dataType: 'json',
-  data: {
-    artist: $('#search').val().trim(),
-    city: ,
-    state: ,
-    radius:
-  }
-});
+      console.log(potato);
+    });
 
-$xhr.done(function(potato) {
-  if ($xhr.status !== 200) {
+    $xhr.fail(function(err) {
+      // The request was unsuccessful for some reason (ie. the server couldn't even respond).
+      console.log(err);
+    });
 
-    return Materialize.toast('Could not locate Artist, try again');
-  }
-  const artistThumb = potato.thumb_url;
-  const artistName = potato.name
-  const artistDescription = potato.weneedtodecidethis
-  const addToFavorites = null;
-  const upcomingShows = facebook_tour_dates_url;
-
-
-  return searchAddCard(potato);
-
-
-    console.log(potato);
-});
-
-$xhr.fail(function(err) {
-    // The request was unsuccessful for some reason (ie. the server couldn't even respond).
-    console.log(err);
-});
-
-})
+  })
 
 
 
+////
 
 
+  $('.eventAdd').click((event) => {
+
+    let $xhr = $.ajax({
+      method: 'GET',  // GET is default
+      url: '/artists',
+      dataType: 'json',
+      data: {
+        artist: $('').val().trim(),
+        city: ,
+        state: ,
+        radius:
+      }
+    });
+
+    $xhr.done(function(potato) {
+      if ($xhr.status !== 200) {
+
+        return Materialize.toast('');
+      }
+
+    });
+
+    $xhr.fail(function(err) {
+      // The request was unsuccessful for some reason (ie. the server couldn't even respond).
+      console.log(err);
+    });
+
+  })
 
 
 const eventTitle = function() {
