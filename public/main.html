@@ -18,7 +18,25 @@
   </head>
   <body>
 
-    <div class="navbar-fixed">     <!-- fixed navbar -->
+    <!-- <nav class="white" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">Concert Clue</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a class="logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <nav>
+  <ul id="slide-out" class="side-nav">
+    <li><a href="#!">First Sidebar Link</a></li>
+    <li><a href="#!">Second Sidebar Link</a></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+</nav> -->
+
+<!-- fixed navbar -->
+    <div class="navbar-fixed">
       <nav class="blue">
         <div class="nav-wrapper">
           <a href="#!" class="brand-logo">Concert Clue</a>
@@ -27,11 +45,12 @@
           </ul>
         </div>
       </nav>
-    </div> <!-- end navbar -->
+    </div>
+    <!-- end navbar -->
 
     <div> <!-- begin main section -->
       <div class="row">
-        <div class ="col s3">
+        <div class ="col l3 m4 s12">
           <div class="collection with-header active">
             <h4 class="collection-header">Favorite Artist</h4>
             <a href="#!" class="collection-item">Alvin</a>
@@ -40,38 +59,38 @@
             <a href="#!" class="collection-item">Chip</a>
           </div>
         </div>
-        <div class="col s9">
+        <div class="col s12 m8 l9">
           <div class="section">
-        </div>
+          </div>
           <div class="row"> <!-- begin search -->
             <form class="searchSubmit">
-              <div class="input-field col s7 offset-s1">
+              <div class="input-field col s9 m9 l8 offset-m1">
                 <input id="search" placeholder="Search an artist to find a show near you" type="search" required>
                 <label for="search"><i class="material-icons">search</i></label>
                 <i class="material-icons">close</i>
               </div>
-              <button class="btn-large waves-effect col s2 offset-2 waves-light" type="submit" name="action">Submit
+              <button class="btn-large waves-effect col s3 m2 offset-2 waves-light" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>
               </button>
             </form>
           </div> <!-- end search -->
-          <div class="divider artistFixture"></div>
+          <div class="artistFixture"></div>
           <div class="section">  <!-- del w SC -->
           <h5>Artist</h5> <!-- del w SC -->
         </div> <!-- del w SC -->
           <div class="row searchResponseCard"> <!-- begin search response card row --> <!-- del w SC -->
 
             <!-- begin card -->
-            <div class="col s9">
+            <div class="col s12 l10">
               <div class="card">
                 <div class="row">
-                  <div class="col s4">
+                  <div class="col m5 s12 l4">
                     <div class="card-image">
                       <img src="https://s3.amazonaws.com/bit-photos/thumb/6115532.jpeg">
                       <span class="card-title">Adele Ipsum</span>
                     </div>
                   </div>
-                  <div class="col s8">
+                  <div class="col s12 m7 l8">
                     <div class="card-content">
                       <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
                     </div>
@@ -91,7 +110,7 @@
           <h5>Upcoming Shows</h5>
         </div>
           <div class="row eventAddCard"> <!-- begin events card row -->
-            <div class="col s10">     <!-- begin card -->
+            <div class="col s12 m10">     <!-- begin card -->
               <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                     <span class="card-title">title</span>
@@ -103,7 +122,7 @@
                   </div>
                 </div>
               </div> <!-- end card -->
-              <div class="col s10">     <!-- begin card -->
+              <div class="col s12 m10">     <!-- begin card -->
                 <div class="card blue-grey darken-1">
                   <div class="card-content white-text">
                     <span class="card-title">Nas @ UB Stadium in Buffalo, NY</span>
