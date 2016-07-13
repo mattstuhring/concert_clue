@@ -3,6 +3,20 @@
 // IFFE to protect global scope - Must be at top of file.
 (function () {
 
+window.COOKIES = {};
+document.cookie.split('; ').forEach((prop) => {
+  const propKey = prop.split('=')[0];
+  const propValue = prop.split('=')[1];
+
+  window.COOKIES[propKey] = propValue;
+});
+
+if (window.COOKIES.loggedIn) {
+  window.location.href = '/main.html';
+
+  return;
+}
+
 const validateSignup = function() {
   const username = $('#username').val().trim();
   const password = $('#password').val().trim();
@@ -22,7 +36,7 @@ const validateSignup = function() {
   radius = radius.trim();
 
   if (username.length < 6 || username.length > 255) {
-    Materialize.toast('User name required', 3000, 'rounded');
+    Materialize.toast('User name must be at least 6', 3000, 'rounded');
     return false;
   }
 
@@ -112,7 +126,7 @@ const registerUser = function() {
 };
 
 const loginUser = function() {
-  
+
 };
 
 
