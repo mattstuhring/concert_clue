@@ -277,15 +277,11 @@
   $('.logout').on('click', logout);
   buildMainPage();
 
+  // const dat = new Date()
+  // const mom = moment(dat);
+  // console.log(moment(new Date).format('MMM D, YYYY'));
+  // console.log(moment().format('YYYY'))
 
 // End IFFE - Must be at bottom of file.
-
-
-
-// $('favart').click((event) => {
-
-// });
-
-
 })();
 // `<a href="${TBD}" class="collection-item">${ArtistName}</a>`
