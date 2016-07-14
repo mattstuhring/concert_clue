@@ -30,7 +30,7 @@ router.get('/users/artists', checkAuth, (req, res, next) => {
   const userId = Number.parseInt(req.session.userId);
 
   knex('artists_users')
-    .select('mbid', 'name', 'image_url', 'thumb_url', 'facebook_page_url', 'facebook_tour_dates_url')
+    .select('artists_users.id as id', 'mbid', 'name', 'image_url', 'thumb_url', 'facebook_page_url', 'facebook_tour_dates_url')
     .where('user_id', userId)
     .innerJoin('artists', 'artists_users.artist_id', 'artists.id')
     .then((favorites) => {
@@ -150,7 +150,43 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
     });
 });
 
+
+
+router.delete('/users/artists', checkAuth, (req, res, next) => {
+  const mbid = mbid;
+
+  knex('artists_users')
+    .select('artists_users.id as mbid')
+    .where('user_id', mbid)
+    .then((delart) => {
+      knex('artists_users')
+        .select('artists_users.id as mbid')
+        .where('user_id', mbid)
+        .then(() => {
+          delete mbid;
+          res.send(artists_users);
+        })
+    .catch((err) => {
+      next(err);
+    });
+  });
+});
+
+
+
 // users_artists delete route
 // use the mbid which is in the array
+
+// accept an mbid
+// joi validation file: validates the body, a single property named mbid
+//   checkAuth
+//   notNull
+//
+//
+// tablejoin before deleting.
+//
+//
+
+
 
 module.exports = router;

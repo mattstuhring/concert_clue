@@ -7,6 +7,18 @@ const bcrypt = require('bcrypt-as-promised');
 const ev = require('express-validation');
 const validations = require('../validations/joiusers');
 
+const checkAuth = function(req, res, next) {
+  if (!Number.parseInt(req.session.userId)) {
+    const err = new Error();
+
+    err.status = 401;
+
+    return next(err);
+  }
+
+  next();
+}
+
 // Req.body must contain user_name, password, city, state, and radius.
 router.post('/users', ev(validations.post), (req, res, next) => {
   const newUser = req.body;
@@ -44,6 +56,22 @@ router.post('/users', ev(validations.post), (req, res, next) => {
       next(err);
     });
 });
+
+router.get('/users', checkAuth, (req,res,next) => {
+  const userId = Number.parseInt(req.session.userId);
+
+  knex('users')
+    .select('first_name', 'last_name', 'city', 'state', 'user_name', 'radius', 'email')
+    .where('id', userId)
+    .first()
+    .then((user) => {
+      return res.send(user);
+    })
+    .catch((err) => {
+      next(err)
+    });
+});
+
 
 module.exports = router;
 

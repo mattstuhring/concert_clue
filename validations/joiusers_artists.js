@@ -11,3 +11,10 @@ module.exports.post = {
       .trim()
   }
 };
+
+module.exports.delete = {
+  body: {
+    mbid: Joi.string()
+      .label('Mbid')
+  }
+}

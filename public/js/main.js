@@ -22,13 +22,38 @@
       $favart.append(`<li class="collection-item avatar">
         <a href="${artist.facebook_page_url}"><img src="${artist.thumb_url}" alt="artist pic" class="circle"></a>
         <span class="title">${artist.name}</span>
-        <a class="secondary-content" mbid="${artist.mbid}"><i class="material-icons">cancel</i></a>
+        <a class="secondary-content" id="${artist.id}"><i class="material-icons">cancel</i></a>
 
       </li>`
       );
     }
   };
 
+
+  const buildEvents = function() {
+    const $eventAddCard = $('.eventAddCard');
+
+    $eventAddCard.children().remove();
+
+    for(const event of events) {
+
+
+      $eventAddCard.append(`
+      <div class="col s12 m10">
+      <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+      <span class="card-title">${event.artists[0].name}</span>
+      <p>${event.venue.name}</p>
+      </div>
+      <div class="card-action">
+      <p>${event.datetime}</p>
+      <p>${event.venue.city}, ${event.venue.region}</p>
+      </div>
+      </div>
+      </div>
+      `);
+    }
+  };
 
 
 
@@ -159,20 +184,7 @@
   //
   //     };
   //
-      // let eventAddCard = function {$('.eventAddCard').append(`
-      //   <div class="col s12 m10">
-      //   <div class="card blue-grey darken-1">
-      //   <div class="card-content white-text">
-      //   <span class="card-title">${eventTitle()}</span>
-      //   <p>${eventDescription()}</p>
-      //   </div>
-      //   <div class="card-action">
-      //   <a href="#">${formatted_datetime()}</a>
-      //   <a href="#">${facebook_tour_dates_url()}</a>
-      //   </div>
-      //   </div>
-      //   </div>
-      //   `)}
+
     // });
   //
   //   $xhr.fail(function(err) {
@@ -217,20 +229,45 @@
       const artistNames = favorites.map((current, index, array) => {
         return current.name;
       })
-      console.log(artistNames);
+      let city;
+      let state;
+      let radius;
       $.ajax({
         method: 'GET',
-        url: '/artists/events/',
-        contentType: 'application/json',
-        data:
-          '{artists: artistNames}'
+        url: '/users/',
+        contentType: 'application/json'
       })
-      .done((events) => {
-        console.log(events);
+      .done((user) => {
+        console.log(user);
+        city = user.city;
+        state = user.state;
+        radius = user.radius;
+
+        $.ajax({
+          method: 'POST',
+          url: '/artists/events/',
+          // processData: false,
+          contentType: 'application/json',
+          data: JSON.stringify({
+            artists: artistNames,
+            city: city,
+            state: state,
+            radius: radius
+          })
+        })
+        .done((localEvents) => {
+          events = _.sortBy(localEvents, (o) => o.datetime);
+          console.log(events);
+          buildEvents();
+        })
+        .fail(() => {
+          return Materialize.toast('We are here');
+        })
       })
       .fail(() => {
-        console.log('We are here');
+        return Materialize.toast('We are fail');
       })
+
     })
     .fail(() => {
       Materialize.toast('Is everything hooked up alright?');
