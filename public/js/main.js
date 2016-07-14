@@ -22,7 +22,7 @@
       $favart.append(`<li class="collection-item avatar">
         <a href="${artist.facebook_page_url}"><img src="${artist.thumb_url}" alt="artist pic" class="circle"></a>
         <span class="title">${artist.name}</span>
-        <a class="secondary-content" id="${artist.id}"><i class="material-icons">cancel</i></a>
+        <a class="secondary-content" ccauid="${artist.id}"><i class="material-icons">cancel</i></a>
 
       </li>`
       );

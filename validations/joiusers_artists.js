@@ -14,7 +14,10 @@ module.exports.post = {
 
 module.exports.delete = {
   body: {
-    mbid: Joi.string()
-      .label('Mbid')
+    ccauid: Joi.number()
+      .label('ccauid')
+      .integer()
+      .min(1)
+      .required()
   }
-}
+};

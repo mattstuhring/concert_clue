@@ -136,12 +136,12 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
         .insert({
           user_id: userId,
           artist_id: artistResult.id
-        });
+        }, "*");
     })
-    .then(() => {
+    .then((artistUsers) => {
       delete artistResult.created_at;
-      delete artistResult.id;
       delete artistResult.updated_at;
+      artistResult.id = artistUsers[0].id;
 
       return res.send(artistResult);
     })
@@ -150,43 +150,37 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
     });
 });
 
-
-
-router.delete('/users/artists', checkAuth, (req, res, next) => {
-  const mbid = mbid;
+// Body must contain the ccauid (id from artists_users) which is stored in
+// Attribute of remove anchor tag on favorites list. ccauid is body property.
+router.delete('/users/artists', checkAuth, ev(val.delete), (req, res, next) => {
+  const id = req.body.ccauid;
+  let artist;
 
   knex('artists_users')
-    .select('artists_users.id as mbid')
-    .where('user_id', mbid)
-    .then((delart) => {
-      knex('artists_users')
-        .select('artists_users.id as mbid')
-        .where('user_id', mbid)
-        .then(() => {
-          delete mbid;
-          res.send(artists_users);
-        })
+    .select('mbid', 'name', 'image_url', 'thumb_url', 'facebook_page_url', 'facebook_tour_dates_url')
+    .where('artists_users.id', id)
+    .join('artists', 'artists_users.artist_id', 'artists.id')
+    .then((deletedArtists) => {
+      if (deletedArtists.length === 0) {
+        const err = new Error();
+
+        err.status = 404;
+
+        throw err;
+      }
+
+      artist = deletedArtists[0];
+
+      return knex('artists_users')
+        .del()
+        .where('id', id)
+    })
+    .then((count) => {
+      return res.send(artist);
+    })
     .catch((err) => {
       next(err);
     });
-  });
 });
-
-
-
-// users_artists delete route
-// use the mbid which is in the array
-
-// accept an mbid
-// joi validation file: validates the body, a single property named mbid
-//   checkAuth
-//   notNull
-//
-//
-// tablejoin before deleting.
-//
-//
-
-
 
 module.exports = router;
