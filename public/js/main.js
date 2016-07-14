@@ -22,7 +22,7 @@
       $favart.append(`<li class="collection-item avatar">
         <a href="${artist.facebook_page_url}"><img src="${artist.thumb_url}" alt="artist pic" class="circle"></a>
         <span class="title">${artist.name}</span>
-        <a class="secondary-content" ccauid="${artist.id}"><i class="material-icons">cancel</i></a>
+        <a class="secondary-content ccauid" ccauid="${artist.id}"><i class="material-icons">cancel</i></a>
 
       </li>`
       );
@@ -46,7 +46,7 @@
       <p>${event.venue.name}</p>
       </div>
       <div class="card-action">
-      <p>${event.datetime}</p>
+      <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
       <p>${event.venue.city}, ${event.venue.region}</p>
       </div>
       </div>
@@ -273,6 +273,45 @@
       Materialize.toast('Is everything hooked up alright?');
     });
   }
+
+  const remFavArt = function(event) {
+    const $a = $(event.target).parent();
+    const ccauid = Number.parseInt($a.attr('ccauid'));
+    let index;
+    for (let i = 0; i < favorites.length; i++) {
+      if (favorites[i].id === ccauid) {
+        index = i;
+        continue;
+      }
+    }
+
+    const $xhr = $.ajax({
+      method: 'DELETE',
+      url: '/users/artists',
+      // dataType: 'json',
+      contentType: 'application/json',
+      // data: '{"title": "Frozen 2: The Thaw", "rating": 6.8}'
+      data: JSON.stringify({ ccauid })
+    });
+
+    $xhr.done((data) => {
+      console.log(data);
+      favorites.splice(index, 1);
+      buildFavorites();
+    });
+
+    $xhr.fail((err) => {
+      if (err.status === 404) {
+        Materialize.toast('That artist is too good to delete.');
+      }
+      else {
+        Materialize.toast('Try again later');
+      }
+    });
+
+  };
+
+  $('.favart').on('click', '.ccauid', remFavArt);
 
   $('.logout').on('click', logout);
   buildMainPage();
