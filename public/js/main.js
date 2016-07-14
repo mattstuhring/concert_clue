@@ -14,7 +14,7 @@
   });
 
   const buildFavorites = function() {
-    favorites = _.sortBy(favorites, (object) => object.name);
+    favorites = _.sortBy(favorites, (fav) => fav.name);
     const $favart = $('.favart');
 
     $favart.children().remove();
@@ -205,9 +205,7 @@
     .done((artists) => {
       favorites = artists;
       buildFavorites();
-      const artistNames = favorites.map((current, index, array) => {
-        return current.name;
-      })
+      const artistNames = favorites.map((art) => art.name);
       let city;
       let state;
       let radius;
@@ -244,7 +242,6 @@
       .fail(() => {
         return Materialize.toast('We are fail', 3000, 'rounded');
       })
-
     })
     .fail(() => {
       Materialize.toast('Is everything hooked up alright?', 3000, 'rounded');
@@ -275,6 +272,42 @@
       console.log(data);
       favorites.splice(index, 1);
       buildFavorites();
+      const artistNames = favorites.map((art) => art.name);
+      let city;
+      let state;
+      let radius;
+      $.ajax({
+        method: 'GET',
+        url: '/users/',
+        contentType: 'application/json'
+      })
+      .done((user) => {
+        city = user.city;
+        state = user.state;
+        radius = user.radius;
+
+        $.ajax({
+          method: 'POST',
+          url: '/artists/events/',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            artists: artistNames,
+            city: city,
+            state: state,
+            radius: radius
+          })
+        })
+        .done((localEvents) => {
+          events = _.sortBy(localEvents, (o) => o.datetime);
+          buildEvents();
+        })
+        .fail(() => {
+          return Materialize.toast('We are here!!!!!!', 3000, 'rounded');
+        })
+      })
+      .fail(() => {
+        return Materialize.toast('We are fail', 3000, 'rounded');
+      })
     });
 
     $xhr.fail((err) => {
@@ -391,10 +424,12 @@
     });
 
     $xhrsearch.fail((err) => {
+      // alert(err.status);
       if (err.status === 404) {
         return Materialize.toast('Artist not found', 3000, 'rounded');
       }
-        Materialize.toast('Hmmm, try again later', 3000, 'rounded');
+
+      Materialize.toast('Hmmm, try again later', 3000, 'rounded');
     });
   }
 
