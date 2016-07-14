@@ -69,6 +69,18 @@ footer.page-footer {
    display: none;
 }
 
+@media only screen and (max-width : 992px) {
+  #top {
+    bottom: -50px;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #top {
+    bottom: 0px;
+  }
+}
+
 #event-container {
   padding-bottom: 100px;
 }
