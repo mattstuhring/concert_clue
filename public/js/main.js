@@ -31,16 +31,11 @@
     }
   };
 
-
-
   const buildEvents = function() {
     const $eventAddCard = $('.eventAddCard');
 
     $eventAddCard.children().remove();
-
     for(const event of events) {
-
-
       $eventAddCard.append(`
       <div class="col s12 m10">
       <div class="card blue-grey darken-1">

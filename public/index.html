@@ -60,23 +60,76 @@
                     </div>
                   </div>
                   <div class="input-field col s6">
-                    <input id="artist" type="text" class="validate black-text">
-                    <label for="artist">Artist</label>
+                    <input id="artist-search" type="text" class="validate black-text">
+                    <label class="active" for="artist">Artist</label>
                   </div>
-                  <div class="input-field col s4">
+                  <div class="input-field col s3">
                     <input id="city-search" type="text" class="validate black-text">
-                    <label for="city-search">City</label>
+                    <label class="active" for="city-search">City</label>
                   </div>
-                  <div class="input-field col s2">
-                    <input id="state-search" type="text" class="validate black-text">
-                    <label for="state-search">State</label>
+                  <div class="input-field col s3">
+                    <!-- <i class="material-icons prefix">landscape</i> -->
+                    <select id="state-search" class="black-text">
+                      <option id="exclude" value="" disabled selected>Select your state</option>
+                      <option value="AL">AL</option>
+                      <option value="AK">AK</option>
+                      <option value="AZ">AZ</option>
+                      <option value="AR">AR</option>
+                      <option value="CA">CA</option>
+                      <option value="CO">CO</option>
+                      <option value="CT">CT</option>
+                      <option value="DE">DE</option>
+                      <option value="FL">FL</option>
+                      <option value="GA">GA</option>
+                      <option value="HI">HI</option>
+                      <option value="ID">ID</option>
+                      <option value="IL">IL</option>
+                      <option value="IN">IN</option>
+                      <option value="IA">IA</option>
+                      <option value="KS">KS</option>
+                      <option value="KY">KY</option>
+                      <option value="LA">LA</option>
+                      <option value="ME">ME</option>
+                      <option value="MD">MD</option>
+                      <option value="MA">MA</option>
+                      <option value="MI">MI</option>
+                      <option value="MN">MN</option>
+                      <option value="MS">MS</option>
+                      <option value="MO">MO</option>
+                      <option value="MT">MT</option>
+                      <option value="NE">NE</option>
+                      <option value="NV">NV</option>
+                      <option value="NH">NH</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NM">NM</option>
+                      <option value="NY">NY</option>
+                      <option value="NC">NC</option>
+                      <option value="ND">ND</option>
+                      <option value="OH">OH</option>
+                      <option value="OK">OK</option>
+                      <option value="OR">OR</option>
+                      <option value="PA">PA</option>
+                      <option value="RI">RI</option>
+                      <option value="SC">SC</option>
+                      <option value="SD">SD</option>
+                      <option value="TN">TN</option>
+                      <option value="TX">TX</option>
+                      <option value="UT">UT</option>
+                      <option value="VT">VT</option>
+                      <option value="VA">VA</option>
+                      <option value="WA">WA</option>
+                      <option value="WV">WV</option>
+                      <option value="WI">WI</option>
+                      <option value="WY">WY</option>
+                    </select>
+                    <label>State</label>
                   </div>
                 </div>
               </form>
             </div>
           </div>
           <div class="row center">
-            <a href="#" class="btn-large waves-effect waves-light red darken-3 white-text z-depth-3">search<i class="material-icons right">search</i></a>
+            <a href="#" id="submit-search" class="btn-large waves-effect waves-light red darken-3 white-text z-depth-3">search<i class="material-icons right">search</i></a>
           </div>
           <br><br>
         </div>
@@ -86,24 +139,12 @@
       </div>
     </div>
     <div class="red darken-3 z-depth-3">
-      <h2 class="center">Upcoming Shows</h2>
+      <h2 id="banner-upcoming" class="center">Upcoming Shows</h2>
     </div>
-    <div class="divider"></div>
-    <div class="container">
-      <div class="section parallax-container valign-wrapper">
-        <!-- <div class="col">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">Card Title</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div> -->
+    <!-- <div class="divider"></div> -->
+    <div id="event-parent-container" class="container">
+      <div id="event-container" class="section parallax-container valign-wrapper">
+        <!-- Content generated dynamically -->
       </div>
     </div>
 

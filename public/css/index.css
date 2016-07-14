@@ -59,11 +59,16 @@ h4 {
 footer.page-footer {
   margin: 0;
 }
+
 #top {
    position:fixed;
    left:0px;
-   bottom:0px;
+   bottom:-100px;
    width:100%;
    z-index:300;
    display: none;
+}
+
+#event-container {
+  padding-bottom: 100px;
 }
