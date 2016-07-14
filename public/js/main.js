@@ -1,6 +1,37 @@
 'use strict';
 (function () {
 
+  let favorites = [];
+  let events = [];
+
+  window.COOKIES = {};
+  document.cookie.split('; ').forEach((prop) => {
+    const propKey = prop.split('=')[0];
+    const propValue = prop.split('=')[1];
+
+    window.COOKIES[propKey] = propValue;
+  });
+
+  const buildFavorites = function() {
+    const $favart = $('.favart');
+
+    $favart.children().remove();
+    $favart.append(`<li class="collection-header"><h4>Favorite Artist</h4></li>`);
+
+    for (const artist of favorites) {
+      $favart.append(`<li class="collection-item avatar">
+        <a href="${artist.facebook_page_url}"><img src="${artist.thumb_url}" alt="artist pic" class="circle"></a>
+        <span class="title">${artist.name}</span>
+        <a class="secondary-content" mbid="${artist.mbid}"><i class="material-icons">cancel</i></a>
+
+      </li>`
+      );
+    }
+  };
+
+
+
+
   // $(".button-collapse").sideNav();
 
 
@@ -11,8 +42,8 @@
   // </div>`)};
 
 
-  //
-  //
+
+
   // let searchCount = 0;
   //
   // $('.searchSubmit').submit((event) => {
@@ -89,7 +120,7 @@
   //     console.log(err);
   //   });
   // })
-  //
+
   //   // add event handler get artist events
   // $('.eventAdd').click((event) => {
   //
@@ -128,21 +159,21 @@
   //
   //     };
   //
-  //     let eventAddCard = function {$('.eventAddCard').append(`
-  //       <div class="col s12 m10">
-  //       <div class="card blue-grey darken-1">
-  //       <div class="card-content white-text">
-  //       <span class="card-title">${eventTitle()}</span>
-  //       <p>${eventDescription()}</p>
-  //       </div>
-  //       <div class="card-action">
-  //       <a href="#">${formatted_datetime()}</a>
-  //       <a href="#">${facebook_tour_dates_url()}</a>
-  //       </div>
-  //       </div>
-  //       </div>
-  //       `)}
-  //   });
+      // let eventAddCard = function {$('.eventAddCard').append(`
+      //   <div class="col s12 m10">
+      //   <div class="card blue-grey darken-1">
+      //   <div class="card-content white-text">
+      //   <span class="card-title">${eventTitle()}</span>
+      //   <p>${eventDescription()}</p>
+      //   </div>
+      //   <div class="card-action">
+      //   <a href="#">${formatted_datetime()}</a>
+      //   <a href="#">${facebook_tour_dates_url()}</a>
+      //   </div>
+      //   </div>
+      //   </div>
+      //   `)}
+    // });
   //
   //   $xhr.fail(function(err) {
   //     // The request was unsuccessful for some reason (ie. the server couldn't even respond).
@@ -150,6 +181,8 @@
   //   });
   //
   // })
+
+
 
   const logout = function() {
     const $xhr = $.ajax({
@@ -170,29 +203,52 @@
     });
   };
 
+  const buildMainPage = function() {
+    $.ajax({
+      method: 'GET',
+      url: '/users/artists',
+      contentType: 'application/json'
+      // data: JSON.stringify()
+    })
+    .done((artists) => {
+      console.log(artists);
+      favorites = artists;
+      buildFavorites();
+      const artistNames = favorites.map((current, index, array) => {
+        return current.name;
+      })
+      console.log(artistNames);
+      $.ajax({
+        method: 'GET',
+        url: '/artists/events/',
+        contentType: 'application/json',
+        data:
+          '{artists: artistNames}'
+      })
+      .done((events) => {
+        console.log(events);
+      })
+      .fail(() => {
+        console.log('We are here');
+      })
+    })
+    .fail(() => {
+      Materialize.toast('Is everything hooked up alright?');
+    });
+  }
+
   $('.logout').on('click', logout);
+  buildMainPage();
 
 
 // End IFFE - Must be at bottom of file.
-})();
 
 
 
 // $('favart').click((event) => {
-//
-//   $('favart').children().remove();
-//   $('favart').append(`<h4 class="collection-header favarttop">Favorite Artist</h4>`);
-//   $('favarttop').append(() => {
-//     ourray = array we receive
-//
-//     for (let i = 0; i < ourray.length; i++){
-//       $('favarttop').append(`<a href="${TBD}" class="collection-item">${ourray[i].name}</a>`);
-//     }
-//   });
-//
+
 // });
 
 
-
-
+})();
 // `<a href="${TBD}" class="collection-item">${ArtistName}</a>`

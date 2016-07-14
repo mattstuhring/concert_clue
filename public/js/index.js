@@ -17,6 +17,24 @@ if (window.COOKIES.loggedIn) {
   return;
 }
 
+const validateUserName = function(username) {
+  if (username.length < 6 || username.length > 255) {
+    Materialize.toast('User name must be at least 6', 3000, 'rounded');
+    return false;
+  }
+
+  return true;
+};
+
+const validatePassword = function(password) {
+  if (password.length < 8 || password.length > 255) {
+    Materialize.toast('Password length must be 8 or more', 3000, 'rounded');
+    return false;
+  }
+
+  return true;
+};
+
 const validateSignup = function() {
   const username = $('#username').val().trim();
   const password = $('#password').val().trim();
@@ -35,13 +53,11 @@ const validateSignup = function() {
   state = state.trim();
   radius = radius.trim();
 
-  if (username.length < 6 || username.length > 255) {
-    Materialize.toast('User name must be at least 6', 3000, 'rounded');
+  if (!validateUserName(username)) {
     return false;
   }
 
-  if (password.length < 8 || password.length > 255) {
-    Materialize.toast('Password length must be 8 or more', 3000, 'rounded');
+  if (!validatePassword(password)) {
     return false;
   }
 
@@ -97,7 +113,8 @@ const registerUser = function() {
         contentType: 'application/json',
         data: JSON.stringify(loggedInUser)
       })
-      .done(() => {
+      .done((data) => {
+        console.log(data);
         window.location.href = '/main.html';
       })
       .fail(() => {
@@ -126,6 +143,29 @@ const registerUser = function() {
 };
 
 const loginUser = function() {
+  const username = $('#username-login').val().trim();
+  const password = $('#password-login').val().trim();
+
+  if (!(validateUserName(username) && validatePassword(password))) {
+    console.log('validate');
+    return $('#register-user').openModal();
+  }
+
+  $.ajax({
+    method: 'POST',
+    url: '/session/',
+    contentType: 'application/json',
+    data: JSON.stringify({ username, password })
+  })
+  .done(() => {
+    console.log('123');
+    $('#register-user').closeModal();
+    console.log('345');
+    window.location.href = '/main.html';
+  })
+  .fail(() => {
+    Materialize.toast('Login failure', 3000, 'rounded');
+  });
 
 };
 
@@ -136,6 +176,7 @@ const loginUser = function() {
 
 // ****************** Establish event listeners
 
+  $('select').material_select();
   $('.button-collapse').sideNav();
   $('.parallax').parallax();
   $('.modal-trigger.signup').leanModal({
@@ -146,7 +187,14 @@ const loginUser = function() {
     ready: null,
     complete: null
   });
-  $('.modal-trigger.login').leanModal();
+  $('.modal-trigger.login').leanModal({
+    dismissible: true,
+    opacity: .5,
+    in_duration: 300,
+    out_duration: 200,
+    ready: null,
+    complete: null
+  });
   $('select').material_select();
 
   $(window).scroll(function() {
@@ -154,7 +202,7 @@ const loginUser = function() {
   });
 
   $('#register-user .modal-action').on('click', registerUser);
-
+  $('#login-user .modal-action').on('click', loginUser);
 
 // End IFFE - Must be at bottom of file.
 })();

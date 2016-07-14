@@ -150,4 +150,7 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
     });
 });
 
+// users_artists delete route
+// use the mbid which is in the array
+
 module.exports = router;
