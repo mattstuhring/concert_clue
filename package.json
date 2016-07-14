@@ -8,7 +8,8 @@
     "start": "node server.js",
     "knex": "knex",
     "heroku-postbuild": "knex migrate:latest",
-    "nodemon": "nodemon server.js"
+    "nodemon": "nodemon server.js",
+    "nf": "nf start"
   },
   "engines": {
     "node": "6.2.2"
