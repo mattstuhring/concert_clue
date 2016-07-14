@@ -1,3 +1,7 @@
-.favart .ccauid {
+.favart .ccauid, .collection-header {
   cursor: pointer;
+}
+
+.collection-header:hover {
+  background-color: red !important;
 }

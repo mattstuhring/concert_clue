@@ -3,6 +3,7 @@
 
   let favorites = [];
   let events = [];
+  let searchText = '';
 
   window.COOKIES = {};
   document.cookie.split('; ').forEach((prop) => {
@@ -13,6 +14,7 @@
   });
 
   const buildFavorites = function() {
+    favorites = _.sortBy(favorites, (object) => object.name);
     const $favart = $('.favart');
 
     $favart.children().remove();
@@ -28,6 +30,7 @@
       );
     }
   };
+
 
 
   const buildEvents = function() {
@@ -94,7 +97,6 @@
   //     const artistName = artist.name;
   //     const artistThumb = artist.thumb_url;
   //     const artistDescription = artist.weneedtodecidethis;
-  //     const addToFavorites = chadRouteTBD;
   //     const upcomingShows = doApiCallMagic || artist.facebook_tour_dates_url;
   //     const city = artist.city;
   //     const state = artist.state;
@@ -115,29 +117,7 @@
   //
   //     searchCount += 1;
   //
-  //     () => {$('.searchResponseCard').append(`
-  //       <div class="col s12 l10">
-  //       <div class="card">
-  //       <div class="row">
-  //       <div class="col m5 s12 l4">
-  //       <div class="card-image">
-  //       <img src=${artistThumb()}>
-  //       <span class="card-title">${artistName()}</span>
-  //       </div>
-  //       </div>
-  //       <div class="col s12 m7 l8">
-  //       <div class="card-content">
-  //       <p>${artistDescription()}</p>
-  //       </div>
-  //       <div class="card-action">
-  //       <a href="#">${addToFavorites()}</a>
-  //       <a class ="eventAdd">Upcoming Shows!</a>
-  //       </div>
-  //       </div>
-  //       </div>
-  //       </div>
-  //       </div>`
-  //     )};
+
   //   });
   //
   //   $xhr.fail(function(err) {
@@ -211,7 +191,7 @@
     });
 
     $xhr.fail(() => {
-      Materialize.toast('Logout failure');
+      Materialize.toast('Logout failure', 3000, 'rounded');
     });
   };
 
@@ -223,7 +203,6 @@
       // data: JSON.stringify()
     })
     .done((artists) => {
-      console.log(artists);
       favorites = artists;
       buildFavorites();
       const artistNames = favorites.map((current, index, array) => {
@@ -238,7 +217,6 @@
         contentType: 'application/json'
       })
       .done((user) => {
-        console.log(user);
         city = user.city;
         state = user.state;
         radius = user.radius;
@@ -257,20 +235,19 @@
         })
         .done((localEvents) => {
           events = _.sortBy(localEvents, (o) => o.datetime);
-          console.log(events);
           buildEvents();
         })
         .fail(() => {
-          return Materialize.toast('We are here');
+          return Materialize.toast('We are here', 3000, 'rounded');
         })
       })
       .fail(() => {
-        return Materialize.toast('We are fail');
+        return Materialize.toast('We are fail', 3000, 'rounded');
       })
 
     })
     .fail(() => {
-      Materialize.toast('Is everything hooked up alright?');
+      Materialize.toast('Is everything hooked up alright?', 3000, 'rounded');
     });
   }
 
@@ -302,18 +279,249 @@
 
     $xhr.fail((err) => {
       if (err.status === 404) {
-        Materialize.toast('That artist is too good to delete.');
+        Materialize.toast('That artist is too good to delete.',
+        3000, 'rounded');
       }
       else {
-        Materialize.toast('Try again later');
+        Materialize.toast('Try again later', 3000, 'rounded');
       }
     });
 
   };
 
+
+  const searchResponseCard = function(artist) {
+    const $searchResponseCard = $('.searchResponseCard');
+
+    $searchResponseCard.children().remove();
+
+    $searchResponseCard.append(`
+    <div class="col s12 l10">
+    <div class="card">
+    <div class="row">
+    <div class="col m5 s12 l4">
+    <div class="card-image">
+    <img src="${artist.thumb_url}" alt"artistPicture">
+    <span class="card-title">${artist.name}</span>
+    </div>
+    </div>
+    <div class="col s12 m7 l8">
+    <div class="card-content">
+    <p>${artist.facebook_page_url}</p>
+    </div>
+    <div class="card-action">
+    <a mbid="${artist.mbid}" class="addFave" href="#">Add to Favorites</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>`
+    )
+      console.log(artist);
+      console.log('cardbuilt');
+  };
+
+  const search = function(event) {
+    const $search = $('#search');
+    const searchTextNow = $search.val().trim().toLowerCase();
+
+    searchText = searchTextNow;
+    if (searchText.length === 0) {
+      Materialize.toast('What would you like to search for?', 3000, 'rounded');
+
+      return;
+    }
+
+    const $xhrsearch = $.ajax({
+      method: 'POST',
+      url: '/artist',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        artist: searchText
+      })
+    });
+
+    $xhrsearch.done((data) => {
+      searchResponseCard(data);
+      const $xhr = $.ajax({
+        method: 'GET',
+        url: '/users',
+        contentType: 'application/json'
+      });
+
+      $xhr.done((data) => {
+        const { city, state, radius } = data;
+
+        const $xhr = $.ajax({
+          method: 'POST',
+          url: '/artists/events',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            artists: [searchText],
+            city: city,
+            state: state,
+            radius: radius
+          })
+        });
+
+        $xhr.done((data) => {
+          console.log(data);
+          if(data.length === 0) {
+            events = [];
+            buildEvents();
+            return Materialize.toast('No upcoming shows', 3000, 'rounded');
+          }
+
+          events = _.sortBy(data, (o) => o.datetime);
+          buildEvents();
+        });
+
+        $xhr.fail((err) => {
+          if (err.status === 404) {
+            return Materialize.toast('Artist not found', 3000, 'rounded');
+          }
+
+          Materialize.toast('Hmmm, try again later', 3000, 'rounded');
+        });
+      });
+
+      $xhr.fail((err) => {
+        Materialize.toast('Try again?', 3000, 'rounded');
+      });
+    });
+
+    $xhrsearch.fail((err) => {
+      if (err.status === 404) {
+        return Materialize.toast('Artist not found', 3000, 'rounded');
+      }
+        Materialize.toast('Hmmm, try again later', 3000, 'rounded');
+    });
+  }
+
+  const addToFavorites = function(event) {
+    console.log(event.target);
+    $.ajax({
+      method: 'POST',
+      url: '/users/artists',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        mbid: $(event.target).attr('mbid')
+      })
+    })
+    .done((artist) => {
+      favorites.push(artist);
+      buildFavorites();
+      const $xhr = $.ajax({
+        method: 'GET',
+        url: '/users',
+        contentType: 'application/json'
+      });
+
+      $xhr.done((data) => {
+        const { city, state, radius } = data;
+        const faveNames = favorites.map((arts) => arts.name)
+          const $xhr = $.ajax({
+          method: 'POST',
+          url: '/artists/events',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            artists: faveNames,
+            city: city,
+            state: state,
+            radius: radius
+          })
+        });
+
+        $xhr.done((data) => {
+          console.log(data);
+          if(data.length === 0) {
+            events = [];
+            buildEvents();
+            return Materialize.toast('No upcoming shows', 3000, 'rounded');
+          }
+
+          events = _.sortBy(data, (o) => o.datetime);
+          buildEvents();
+        });
+
+        $xhr.fail((err) => {
+          if (err.status === 404) {
+            return Materialize.toast('Artist not found', 3000, 'rounded');
+          }
+
+          Materialize.toast('Hmmm, try again later', 3000, 'rounded');
+        });
+      });
+
+      $xhr.fail((err) => {
+        Materialize.toast('Try again?', 3000, 'rounded');
+      });
+    })
+    .fail((err) => {
+      if(err.status === 406) {
+        return Materialize.toast('Dang, you must like them!', 3000, 'rounded');
+      }
+      Materialize.toast('We have a problem, try again', 3000, 'rounded');
+    });
+  };
+
+  const showFavorites = function(event) {
+    const $xhr = $.ajax({
+      method: 'GET',
+      url: '/users',
+      contentType: 'application/json'
+    });
+
+    $xhr.done((data) => {
+      const { city, state, radius } = data;
+      const faveNames = favorites.map((arts) => arts.name)
+        const $xhr = $.ajax({
+        method: 'POST',
+        url: '/artists/events',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          artists: faveNames,
+          city: city,
+          state: state,
+          radius: radius
+        })
+      });
+
+      $xhr.done((data) => {
+        console.log(data);
+        if(data.length === 0) {
+          events = [];
+          buildEvents();
+          return Materialize.toast('No upcoming shows', 3000, 'rounded');
+        }
+
+        events = _.sortBy(data, (o) => o.datetime);
+        buildEvents();
+      });
+
+      $xhr.fail((err) => {
+        if (err.status === 404) {
+          return Materialize.toast('Artist not found', 3000, 'rounded');
+        }
+
+        Materialize.toast('Hmmm, try again later', 3000, 'rounded');
+      });
+    });
+
+    $xhr.fail((err) => {
+      Materialize.toast('Try again?', 3000, 'rounded');
+    });
+  };
+
   $('.favart').on('click', '.ccauid', remFavArt);
 
+  $('#searchbutton').click(search);
+
   $('.logout').on('click', logout);
+
+  $('.favart').on('click', '.collection-header', showFavorites);
+
+  $('.searchResponseCard').on('click', '.addFave', addToFavorites);
   buildMainPage();
 
   // const dat = new Date()

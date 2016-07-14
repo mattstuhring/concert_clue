@@ -2,7 +2,7 @@
 
 const Joi = require('joi');
 
-module.exports.get = {
+module.exports.post = {
   body: {
     artist: Joi.string()
       .label('Artist')

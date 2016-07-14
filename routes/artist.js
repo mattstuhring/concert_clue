@@ -8,7 +8,7 @@ const rp = require('request-promise');
 const validations = require('../validations/joiartist');
 
 // Req body must have a single property called artist with an artist name string
-router.get('/artists', ev(validations.get), (req, res, next) => {
+router.post('/artist', ev(validations.post), (req, res, next) => {
   const { artist } = req.body;
   const appId = 'CHADTEST';
   const escArtist = encodeURIComponent(artist);

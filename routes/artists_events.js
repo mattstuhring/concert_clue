@@ -29,13 +29,13 @@ router.post('/artists/events', ev(validations.get), (req, res, next) => {
 
   rp(options)
     .then((events) => {
-      if (events.length === 0) {
-        const err = new Error();
-
-        err.status = 404;
-
-        throw err;
-      }
+      // if (events.length === 0) {
+      //   const err = new Error();
+      //
+      //   err.status = 404;
+      //
+      //   throw err;
+      // }
 
       return res.send(events);
     })

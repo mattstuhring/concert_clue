@@ -127,7 +127,7 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
       if (favorites.length > 0) {
         const err = new Error();
 
-        err.status = 400;
+        err.status = 406;
 
         throw err;
       }
