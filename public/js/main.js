@@ -37,14 +37,14 @@
     $eventAddCard.children().remove();
     for(const event of events) {
       $eventAddCard.append(`
-      <div class="col s12 barley">
-        <div class="hops">
+      <div class="col s12 barley valign-wrapper">
+      <div class="hops valign">
+      <p></p>
+      <span>${event.artists[0].name}</span>
+      <p>${event.venue.name}</p>
+      <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
+      <p>${event.venue.city}, ${event.venue.region}</p>
           <div>
-            <span>${event.artists[0].name}</span>
-            <p>${event.venue.name}</p>
-
-            <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
-            <p>${event.venue.city}, ${event.venue.region}</p>
           </div>
         </div>
       </div>
