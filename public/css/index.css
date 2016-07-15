@@ -12,6 +12,30 @@ p {
   line-height: 2rem;
 }
 
+.barley {
+	width: 100% !important;
+	padding-bottom: 34.97% !important;
+  /*height: 300px;*/
+  display: inline-block;
+  /*box-sizing: padding-box;*/
+  /* 16:9 */
+	position: relative;
+  background: url('ticket.jpg') no-repeat;
+  background-size: 100%;
+  margin-top: 10px;
+}
+
+.hops {
+  text-align: center;
+  /*padding: 10% 30% 15% 20%;*/
+	top: 10%; bottom: 0; left: 0; right: 0;
+  /*margin: 0;*/
+  position: absolute;
+  /*box-sizing: padding-box;*/
+  font-size: 2vw;
+  color: black;
+}
+
 .logo {
   height: 4.3rem;
 }

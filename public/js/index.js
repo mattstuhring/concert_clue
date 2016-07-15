@@ -178,19 +178,16 @@
     for(const event of events) {
       console.log(event);
       $row.append(`
-      <div class="row">
-        <div class="col s12 m8 offset-m2">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">${event.artists[0].name}</span>
-              <p>${event.venue.name}</p>
-            </div>
-          <div class="card-action">
+        <div class="col s12 barley valign-wrapper">
+          <div class="hops valign">
+            <p></p>
+            <span>${event.artists[0].name}</span>
+            <p>${event.venue.name}</p>
             <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
             <p>${event.venue.city}, ${event.venue.region}</p>
+            <div></div>
           </div>
         </div>
-      </div>
       `);
     }
   };
