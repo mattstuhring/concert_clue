@@ -21,12 +21,12 @@
     $favart.append(`<li class="collection-header"><h4>Favorite Artist</h4></li>`);
 
     for (const artist of favorites) {
-      $favart.append(`<li class="collection-item avatar">
-        <a href="${artist.facebook_page_url}"><img src="${artist.thumb_url}" alt="artist pic" class="circle"></a>
-        <span class="title">${artist.name}</span>
-        <a class="secondary-content ccauid" ccauid="${artist.id}"><i class="material-icons">cancel</i></a>
-
-      </li>`
+      $favart.append(
+        `<li class="collection-item avatar">
+          <a href="${artist.facebook_page_url}"><img src="${artist.thumb_url}" alt="artist pic" class="circle"></a>
+          <span class="title">${artist.name}</span>
+          <a class="secondary-content ccauid" ccauid="${artist.id}"><i class="material-icons">cancel</i></a>
+        </li>`
       );
     }
   };
@@ -38,16 +38,16 @@
     for(const event of events) {
       $eventAddCard.append(`
       <div class="col s12 m10">
-      <div class="card blue-grey darken-1">
-      <div class="card-content white-text">
-      <span class="card-title">${event.artists[0].name}</span>
-      <p>${event.venue.name}</p>
-      </div>
-      <div class="card-action">
-      <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
-      <p>${event.venue.city}, ${event.venue.region}</p>
-      </div>
-      </div>
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">${event.artists[0].name}</span>
+            <p>${event.venue.name}</p>
+          </div>
+          <div class="card-action">
+            <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
+            <p>${event.venue.city}, ${event.venue.region}</p>
+          </div>
+        </div>
       </div>
       `);
     }
@@ -323,26 +323,26 @@
 
     $searchResponseCard.children().remove();
 
-    $searchResponseCard.append(`
-    <div class="col s12 l10">
-    <div class="card">
-    <div class="row">
-    <div class="col m5 s12 l4">
-    <div class="card-image">
-    <img src="${artist.thumb_url}" alt"artistPicture">
-    <span class="card-title">${artist.name}</span>
-    </div>
-    </div>
-    <div class="col s12 m7 l8">
-    <div class="card-content">
-    <p>${artist.facebook_page_url}</p>
-    </div>
-    <div class="card-action">
-    <a mbid="${artist.mbid}" class="addFave" href="#">Add to Favorites</a>
-    </div>
-    </div>
-    </div>
-    </div>
+    $searchResponseCard.append(
+      `<div class="col s12 l10">
+        <div class="card">
+          <div class="row">
+            <div class="col m5 s12 l4">
+              <div class="card-image">
+                <img src="${artist.thumb_url}" alt"artistPicture">
+                <span class="card-title">${artist.name}</span>
+              </div>
+            </div>
+            <div class="col s12 m7 l8">
+              <div class="card-content">
+                <p>${artist.facebook_page_url}</p>
+              </div>
+            <div class="card-action">
+              <a mbid="${artist.mbid}" class="addFave" href="#">Add to Favorites</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>`
     )
       console.log(artist);

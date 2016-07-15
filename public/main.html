@@ -10,6 +10,9 @@
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+
     <!--Import index.css-->
     <!-- <link type="text/css" rel="stylesheet" href="css/index.css"/> -->
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
@@ -20,15 +23,22 @@
   </head>
   <body>
 
-    <nav class="white" role="navigation">
-      <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo">Concert Clue</a>
+    <nav class="red darken-3 z-depth-3" role="navigation">
+      <div class="nav-wrapper">
+        <a id="logo-container" href="#" class="brand-logo"><img class="logo" src="../images/logo.jpg" alt="" /></a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li><a class="logout">Logout</a></li>
+          <li><a class="logout btn waves-effect waves-light black white-text z-depth-3">Logout</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="sass.html">Sass</a></li>
+          <li><a href="badges.html">Components</a></li>
+          <li><a href="collapsible.html">Javascript</a></li>
+          <li><a href="mobile.html">Mobile</a></li>
         </ul>
       </div>
     </nav>
-
+    <div class="section"></div>
     <div> <!-- begin main section -->
       <div class="row">
         <div class ="col l3 m4 s12">
@@ -37,24 +47,28 @@
           </ul>
         </div>
         <div class="col s12 m8 l9">
-          <div class="section">
+          <!-- begin search -->
+          <div class="row">
+            <div class="row black search-margin z-depth-3">
+              <div class="section section-round"></div>
+              <form class="searchSubmit">
+                <div class="input-field col s9 m9 l8 offset-m1 offset-l1 white">
+                  <input id="search" placeholder="Search an artist to find a show near you" type="search" required>
+                  <label for="search"><i class="material-icons">search</i></label>
+                  <i class="material-icons">close</i>
+                </div>
+                <a id="searchbutton" class="btn-large waves-effect col s3 m2 offset-2 waves-light red darken-3 align-right" name="action">Search
+                  <i class="material-icons right">search</i>
+                </a>
+              </form>
+            </div>
+            <div class="section black"></div>
+            <div class="row">
+              <h2 class="center red darken-3 z-depth-3 artist-bar">Artist</h2>
+            </div> <!-- end search -->
           </div>
-          <div class="row"> <!-- begin search -->
-            <form class="searchSubmit">
-              <div class="input-field col s9 m9 l8 offset-m1">
-                <input id="search" placeholder="Search an artist to find a show near you" type="search" required>
-                <label for="search"><i class="material-icons">search</i></label>
-                <i class="material-icons">close</i>
-              </div>
-              <a id="searchbutton" class="btn-large waves-effect col s3 m2 offset-2 waves-light" name="action">Search
-                <i class="material-icons right">send</i>
-              </a>
-            </form>
-          </div> <!-- end search -->
+
           <div class="artistFixture"></div>
-          <div class="section">  <!-- del w SC -->
-          <h5>Artist</h5> <!-- del w SC -->
-        </div> <!-- del w SC -->
           <div class="row searchResponseCard"> <!-- begin search response card row --> <!-- del w SC -->
 
             <!-- begin card -->
@@ -82,10 +96,7 @@
             <!-- end card -->
 
           </div>  <!-- end search response card row del w SC-->
-          <div class="divider"></div>
-          <div class="section">
-          <h5>Upcoming Shows</h5>
-        </div>
+          <h2 class="center red darken-3 z-depth-3">Upcoming Shows</h2>
           <div class="row eventAddCard"> <!-- begin events card row -->
 
           </div>  <!-- end events card row-->
