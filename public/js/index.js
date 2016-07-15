@@ -260,6 +260,7 @@
 
   const validateNotEmpty = function(event) {
     const $target = $(event.target);
+
     if ($target.val().trim() === '') {
       $target.addClass('invalid');
       $target.removeClass('valid');
@@ -270,11 +271,26 @@
     }
   }
 
+  const validateStateNotEmpty = function(event) {
+    const $target = $(event.target);
+    const $select = $('.select-wrapper input.select-dropdown');
+
+    if ($target.val().trim() === '') {
+      $select.addClass('invalid');
+      $select.removeClass('valid');
+    }
+    else {
+      $select.addClass('valid');
+      $select.removeClass('invalid');
+    }
+  }
+
   const checkSearch = function(event) {
     if (event.keyCode === 13) {
       searchArtist();
     }
   }
+
 
 // ****************** Establish event listeners / Immediate execution
   buildCookie();
@@ -308,5 +324,7 @@
   $('#submit-search').on('click', searchArtist);
   $('#city-search, #artist-search').on('keyup', validateNotEmpty);
   $('#city-search, #artist-search, #state-search').on('keyup', checkSearch);
+  $('#state-search').on('change', validateStateNotEmpty);
+  $('.select-wrapper input.select-dropdown').addClass('invalid');
 // End IFFE - Must be at bottom of file.
 })();
