@@ -178,7 +178,7 @@
     for(const event of events) {
       console.log(event);
       $row.append(`
-        <div class="col s12 barley valign-wrapper">
+        <div class="col s12 barley valign-wrapper z-depth-3">
           <div class="hops valign">
             <p></p>
             <span>${event.artists[0].name}</span>

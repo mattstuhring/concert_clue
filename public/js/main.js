@@ -36,7 +36,7 @@
 
     $eventAddCard.children().remove();
     for(const event of events) {
-      $eventAddCard.append(`<div class="col s12 barley valign-wrapper">
+      $eventAddCard.append(`<div class="col s12 barley valign-wrapper z-depth-3">
         <div class="hops valign">
           <p></p>
           <span>${event.artists[0].name}</span>
