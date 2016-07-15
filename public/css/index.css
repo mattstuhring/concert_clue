@@ -1,27 +1,30 @@
+h4 {
+  margin-bottom: 0px;
+  margin-top: 80px;
+}
+
 html, body {
   height: 100%;
   font-family: 'Permanent Marker', cursive;
-}
-
-.logo {
-  height: 4.3rem;
 }
 
 p {
   line-height: 2rem;
 }
 
-h4 {
-  margin-bottom: 0px;
-  margin-top: 80px;
+.logo {
+  height: 4.3rem;
 }
+
 .button-collapse {
   color: #26a69a;
 }
+
 .artist-bar {
   border-radius: 5px;
   margin-bottom: 0px;
 }
+
 .parallax-container {
   min-height: 600px;
   line-height: 0;
