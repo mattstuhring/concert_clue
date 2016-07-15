@@ -117,7 +117,6 @@
           data: JSON.stringify(loggedInUser)
         })
         .done((data) => {
-          console.log(data);
           window.location.href = '/main.html';
         })
         .fail(() => {
@@ -150,7 +149,7 @@
     const password = $('#password-login').val().trim();
 
     if (!(validateUserName(username) && validatePassword(password))) {
-      console.log('validate');
+
       return $('#register-user').openModal();
     }
 
@@ -161,9 +160,7 @@
       data: JSON.stringify({ username, password })
     })
     .done(() => {
-      console.log('123');
       $('#register-user').closeModal();
-      console.log('345');
       window.location.href = '/main.html';
     })
     .fail(() => {
@@ -179,16 +176,20 @@
     $eventContainer.append('<div class="row"></div>');
     const $row = $eventContainer.children().first();
     for(const event of events) {
+      console.log(event);
       $row.append(`
-      <div class="col s12 m8 offset-m2">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span class="card-title">${event.artists[0].name}</span>
-            <p>${event.venue.name}</p>
+      <div class="row">
+        <div class="col s12 m8 offset-m2">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">${event.artists[0].name}</span>
+              <p>${event.venue.name}</p>
+            </div>
+          <div class="card-action">
+            <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
+            <p>${event.venue.city}, ${event.venue.region}</p>
           </div>
-        <div class="card-action">
-        <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
-        <p>${event.venue.city}, ${event.venue.region}</p>
+        </div>
       </div>
       `);
     }
@@ -246,7 +247,6 @@
       const element = $eventContainer.children().last()[0];
       const elemRect = element.getBoundingClientRect();
       const offset = elemRect.bottom - bodyRect.top;
-      console.log(offset);
       $(window).scroll(function() {
         $('#top').toggle($(document).scrollTop() > offset - 600);
       });
@@ -260,6 +260,24 @@
       }
     });
   };
+
+  const validateNotEmpty = function(event) {
+    const $target = $(event.target);
+    if ($target.val().trim() === '') {
+      $target.addClass('invalid');
+      $target.removeClass('valid');
+    }
+    else {
+      $target.addClass('valid');
+      $target.removeClass('invalid');
+    }
+  }
+
+  const checkSearch = function(event) {
+    if (event.keyCode === 13) {
+      searchArtist();
+    }
+  }
 
 // ****************** Establish event listeners / Immediate execution
   buildCookie();
@@ -291,5 +309,7 @@
   $('#register-user .modal-action').on('click', registerUser);
   $('#login-user .modal-action').on('click', loginUser);
   $('#submit-search').on('click', searchArtist);
+  $('#city-search, #artist-search').on('keyup', validateNotEmpty);
+  $('#city-search, #artist-search, #state-search').on('keyup', checkSearch);
 // End IFFE - Must be at bottom of file.
 })();

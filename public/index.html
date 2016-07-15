@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="grey lighten-3">
   <head>
     <meta charset="utf-8">
     <title>Concert Clue</title>
@@ -27,10 +27,10 @@
           <ul class="right col s12 m6 l3">
 
             <!-- Modal Trigger Login -->
-            <li><a class="waves-effect waves-light btn modal-trigger login black white-text z-depth-3" href="#login-user">Login</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger login black grey-text text-lighten-2 z-depth-3" href="#login-user">Login</a></li>
 
             <!-- Modal Trigger Signup -->
-            <li><a class="waves-effect waves-light btn modal-trigger signup black white-text z-depth-3" href="#register-user">Signup</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger signup black grey-text text-lighten-2 z-depth-3" href="#register-user">Signup</a></li>
           </ul>
       </nav>
     </div>
@@ -46,20 +46,20 @@
               <div class="row artist-bar white">
                 <div class="row">
                   <h4 class="header center black-text">Search for concerts by your favorite artist</h4>
-                  <div class="divider col s10 offset-s1 red"></div>
+                  <!-- <div class="divider col s10 offset-s1 red"></div> -->
                 </div>
                 <div class="input-field col s6">
-                  <input class="black-text" id="artist-search" type="text">
-                  <label class="active" for="artist-search">Artist</label>
+                  <input class="black-text invalid" id="artist-search" type="text">
+                  <label for="artist-search">Artist</label>
                 </div>
                 <div class="input-field col s3">
-                  <input id="city-search" type="text" class="validate black-text">
-                  <label class="active" for="city-search">City</label>
+                  <input class="black-text invalid" id="city-search" type="text">
+                  <label for="city-search">City</label>
                 </div>
                 <div class="input-field col s3">
                   <!-- <i class="material-icons prefix">landscape</i> -->
                   <select id="state-search" class="black-text">
-                    <option id="exclude" value="" disabled selected>Select your state</option>
+                    <!-- <option id="exclude" value="" disabled selected>Select your state</option> -->
                     <option value="AL">AL</option>
                     <option value="AK">AK</option>
                     <option value="AZ">AZ</option>
@@ -111,13 +111,13 @@
                     <option value="WI">WI</option>
                     <option value="WY">WY</option>
                   </select>
-                  <label>State</label>
+                  <label class="select-label">State</label>
                 </div>
               </div>
             </form>
           </div>
           <div class="row center">
-            <a href="#" id="submit-search" class="btn-large waves-effect waves-light red darken-3 white-text z-depth-3">search<i class="material-icons right">search</i></a>
+            <a href="#" id="submit-search" class="btn-large waves-effect waves-light red darken-3 grey-text text-lighten-2 z-depth-3">search<i class="material-icons right">search</i></a>
           </div>
           <br><br>
         </div>
@@ -130,8 +130,8 @@
       <h2 id="banner-upcoming" class="center">Upcoming Shows</h2>
     </div>
     <!-- <div class="divider"></div> -->
-    <div id="event-parent-container" class="container">
-      <div id="event-container" class="section parallax-container valign-wrapper">
+    <div id="event-parent-container container">
+      <div id="event-container" class="section parallax-container">
         <!-- Content generated dynamically -->
       </div>
     </div>

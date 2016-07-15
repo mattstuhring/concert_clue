@@ -23,6 +23,7 @@ p {
 .artist-bar {
   border-radius: 5px;
   margin-bottom: 0px;
+  background-color: rgba(255, 255, 255, .6) !important;
 }
 
 .parallax-container {
@@ -97,3 +98,50 @@ footer.page-footer {
 #event-container {
   padding-bottom: 100px;
 }
+
+.input-field label.active {
+  position: absolute;
+  top: -14px;
+  color: #aaa
+}
+
+/* input, select, and label styling */
+   .input-field label {
+     color: #ee6e73;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #666;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #73ee6e;
+     box-shadow: 0 1px 0 0 #73ee6e;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #ee6e73;
+     box-shadow: 0 1px 0 0 #ee6e73;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #000;
+   }
+
+   input[type=text], .select-wrapper input.select-dropdown {
+     border-bottom: 1px solid #73ee6e;
+     box-shadow: 0 1px 0 0 #73ee6e;
+   }
+
+   .dropdown-content li>a, .dropdown-content li>span {
+     color: #ee6e73;
+   }
+
+   label.select-label {
+     color: #666;
+   }
