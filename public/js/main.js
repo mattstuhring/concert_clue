@@ -36,19 +36,16 @@
 
     $eventAddCard.children().remove();
     for(const event of events) {
-      $eventAddCard.append(`
-      <div class="col s12 barley valign-wrapper">
-      <div class="hops valign">
-      <p></p>
-      <span>${event.artists[0].name}</span>
-      <p>${event.venue.name}</p>
-      <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
-      <p>${event.venue.city}, ${event.venue.region}</p>
-          <div>
-          </div>
+      $eventAddCard.append(`<div class="col s12 barley valign-wrapper">
+        <div class="hops valign">
+          <p></p>
+          <span>${event.artists[0].name}</span>
+          <p>${event.venue.name}</p>
+          <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
+          <p>${event.venue.city}, ${event.venue.region}</p>
+          <div></div>
         </div>
-      </div>
-      `);
+      </div>`);
     }
   };
 
@@ -326,22 +323,27 @@
       `<div class="col s12 l10">
         <div class="card">
           <div class="row">
-            <div class="col m5 s12 l4">
-              <div class="card-image">
-                <img src="${artist.thumb_url}" alt"artistPicture">
-                <span class="card-title">${artist.name}</span>
-              </div>
-            </div>
+                <div class="col m5 s12 l4">
+                  <div class="card-image">
+                    <img src="${artist.thumb_url}" alt"artistPicture">
+                  </div>
+                </div>
             <div class="col s12 m7 l8">
               <div class="card-content">
-                <a href="${artist.facebook_page_url}">Facebook</p>
+                <span class="card-title"><h4>${artist.name}</h4></span>
               </div>
-            <div class="card-action">
-              <a mbid="${artist.mbid}" class="addFave" href="#">Add to Favorites</a>
+              <div class="card-action">
+                <div class="row">
+                  <div class="col s8">
+                    <h5><a mbid="${artist.mbid}" class="addFave" href="#">Add to Favorites<h5><h5>
+                  </div>
+                <div class="col s4">
+                  <a href="${artist.facebook_page_url}"><img src="/images/fb30.png"></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     </div>`
     )
       console.log(artist);
