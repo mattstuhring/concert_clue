@@ -335,7 +335,7 @@
             </div>
             <div class="col s12 m7 l8">
               <div class="card-content">
-                <p>${artist.facebook_page_url}</p>
+                <a href="${artist.facebook_page_url}">Facebook</p>
               </div>
             <div class="card-action">
               <a mbid="${artist.mbid}" class="addFave" href="#">Add to Favorites</a>
