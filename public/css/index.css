@@ -158,8 +158,8 @@ footer.page-footer {
    }
 
    input[type=text], .select-wrapper input.select-dropdown {
-     border-bottom: 1px solid #73ee6e;
-     box-shadow: 0 1px 0 0 #73ee6e;
+     border-bottom: 1px solid #ee6e73;
+     box-shadow: 0 1px 0 0 #ee6e73;
    }
 
    .dropdown-content li>a, .dropdown-content li>span {
