@@ -283,14 +283,17 @@
       $select.addClass('valid');
       $select.removeClass('invalid');
     }
-  }
+  };
 
   const checkSearch = function(event) {
     if (event.keyCode === 13) {
       searchArtist();
     }
-  }
+  };
 
+  const setupLogin = function(event) {
+    $('#username-login').attr('autofocus', true);
+  };
 
 // ****************** Establish event listeners / Immediate execution
   buildCookie();
@@ -310,7 +313,7 @@
     opacity: .5,
     in_duration: 300,
     out_duration: 200,
-    ready: null,
+    ready: setupLogin,
     complete: null
   });
   $('select').material_select();
