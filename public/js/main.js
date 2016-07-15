@@ -37,13 +37,12 @@
     $eventAddCard.children().remove();
     for(const event of events) {
       $eventAddCard.append(`
-      <div class="col s12 m10">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span class="card-title">${event.artists[0].name}</span>
+      <div class="col s12 barley">
+        <div class="hops">
+          <div>
+            <span>${event.artists[0].name}</span>
             <p>${event.venue.name}</p>
-          </div>
-          <div class="card-action">
+
             <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
             <p>${event.venue.city}, ${event.venue.region}</p>
           </div>

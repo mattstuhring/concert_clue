@@ -8,7 +8,7 @@ html, body {
 }
 
 .collection-header:hover {
-  background-color: red !important;
+  background-color: #c62828 !important;
 }
 
 .logo {
@@ -18,6 +18,28 @@ html, body {
   background-image: url('crowd_header.jpg');
   background-size: contain;
   border: 1px solid black;
+}
+
+
+.barley {
+	width: 100% !important;
+	padding-bottom: 30% !important;
+  height: 300px;
+  display: inline-block;
+  /* 16:9 */
+	position: relative;
+  background: url('ticket.jpg') no-repeat center center;
+  background-size: 100%;
+}
+
+div.hops {
+  /*padding: 15% 30% 15% 20%;*/
+	top: 80%; bottom: 0; left: 0; right: 0;
+  /*margin: 0;*/
+  position: relative;
+	text-align: center;
+  /*box-sizing: padding-box;*/
+
 }
 
 h2 {
@@ -46,4 +68,12 @@ h2 {
 
 nav ul a.btn {
   margin-right: 60px;
+}
+
+@media only screen and (max-width: 760px) {
+  nav ul a.btn {
+    margin-top: 72px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
 }
