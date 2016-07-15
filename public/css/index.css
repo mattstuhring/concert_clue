@@ -46,9 +46,19 @@ p {
   }
 }
 
+@media only screen and (max-width : 700px) {
+  nav ul a.btn {
+    margin-top: 92px;
+  }
+}
+
 @media only screen and (max-width : 600px) {
   #index-banner .section {
     top: 0;
+  }
+
+  nav ul a.btn {
+    margin-top: 84px;
   }
 }
 
