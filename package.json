@@ -8,6 +8,7 @@
     "start": "node server.js",
     "knex": "knex",
     "heroku-postbuild": "knex migrate:latest",
+    "lint": "eslint .",
     "nodemon": "nodemon server.js",
     "nf": "nf start"
   },
