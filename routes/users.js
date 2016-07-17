@@ -17,7 +17,7 @@ const checkAuth = function(req, res, next) {
   }
 
   next();
-}
+};
 
 // Req.body must contain user_name, password, city, state, and radius.
 router.post('/users', ev(validations.post), (req, res, next) => {
@@ -29,10 +29,10 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     .where('user_name', user_name)
     .first()
     .then((exists) => {
-      if(exists) {
+      if (exists) {
         const err = new Error('Username already exists');
-        err.status = 401;
 
+        err.status = 401;
         throw err;
       }
 
@@ -40,8 +40,8 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     })
     .then((hashed_password) => {
       return knex('users').insert({
-        user_name: user_name,
-        hashed_password: hashed_password,
+        user_name,
+        hashed_password,
         first_name: newUser.first_name,
         last_name: newUser.last_name,
         city: newUser.city,
@@ -57,21 +57,21 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     });
 });
 
-router.get('/users', checkAuth, (req,res,next) => {
+router.get('/users', checkAuth, (req, res, next) => {
   const userId = Number.parseInt(req.session.userId);
 
   knex('users')
-    .select('first_name', 'last_name', 'city', 'state', 'user_name', 'radius', 'email')
+    .select('first_name', 'last_name', 'city', 'state', 'user_name', 'radius',
+     'email')
     .where('id', userId)
     .first()
     .then((user) => {
       return res.send(user);
     })
     .catch((err) => {
-      next(err)
+      next(err);
     });
 });
-
 
 module.exports = router;
 
@@ -83,7 +83,9 @@ module.exports = router;
 //
 //   node get request to bandsintown for the artist
 //
-//   feed response filtered by user request fields to a searchReturnCard on the logged in users screen. this card will be immediately beneeath the search bar, and will delete any prexisting searchReturnCard
+//   feed response filtered by user request fields to a searchReturnCard on the
+// logged in users screen. this card will be immediately beneeaththe search bar,
+// and will delete any prexisting searchReturnCard
 //
 //   if user clicks to add to their favorites
 //     send a post request to routes /artists/users
@@ -94,7 +96,8 @@ module.exports = router;
 //
 //   then add foreign key into the artists_users table.
 //
-//   Visually .push() add the artist to the sidebar of favorites. delete sidebar and rewrite sidebar.
+//   Visually .push() add the artist to the sidebar of favorites. delete
+// sidebar and rewrite sidebar.
 //
 //   rewipe the upcoming shows to ensure the new artists results are shown
 //
@@ -106,6 +109,7 @@ module.exports = router;
 //   send a router.delete() to the artists/users route.
 //   Delete artist from artists_users table.
 //   Remove artist from favorites sidebar.
-//   refresh the upcoming shows to ensure the removed artists' concerts are no longer there.
+//   refresh the upcoming shows to ensure the removed artists' concerts
+//  are no longer there.
 //
 // /

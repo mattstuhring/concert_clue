@@ -8,12 +8,14 @@ const validations = require('../validations/joiartists_events');
 const genEventsQuery = require('../modules/utils').genEventsQuery;
 const rp = require('request-promise');
 
-// Req.body should contain: a property called artists which is an array of artist names; optionally city, state, and radius all at once or not at all.
+// Req.body should contain: a property called artists which is an array of
+ // artist names; optionally city, state, and radius all at once or not at all.
 router.post('/artists/events', ev(validations.get), (req, res, next) => {
   const { artists, city, state, radius } = req.body;
   const eventsURL = 'http://api.bandsintown.com/events/search?api_version=2.0';
   const appId = 'CHADTEST';
-  console.log(req.body);
+
+  // console.log(req.body);
   if (!artists) {
     const err = new Error();
 
@@ -47,6 +49,5 @@ router.post('/artists/events', ev(validations.get), (req, res, next) => {
       next(err);
     });
 });
-
 
 module.exports = router;

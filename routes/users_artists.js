@@ -3,7 +3,6 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
-const bcrypt = require('bcrypt-as-promised');
 const ev = require('express-validation');
 const val = require('../validations/joiusers_artists');
 const rp = require('request-promise');
@@ -22,15 +21,17 @@ const checkAuth = function(req, res, next) {
   }
 
   next();
-}
+};
 
-// Get all artists that a user has in their favorites - responds with an array of artist objects or an empty array
+// Get all artists that a user has in their favorites - responds with an
+// array of artist objects or an empty array
 // Only triggered on users's login or page refresh?
 router.get('/users/artists', checkAuth, (req, res, next) => {
   const userId = Number.parseInt(req.session.userId);
 
   knex('artists_users')
-    .select('artists_users.id as id', 'mbid', 'name', 'image_url', 'thumb_url', 'facebook_page_url', 'facebook_tour_dates_url')
+    .select('artists_users.id as id', 'mbid', 'name', 'image_url',
+    'thumb_url', 'facebook_page_url', 'facebook_tour_dates_url')
     .where('user_id', userId)
     .innerJoin('artists', 'artists_users.artist_id', 'artists.id')
     .then((favorites) => {
@@ -42,10 +43,12 @@ router.get('/users/artists', checkAuth, (req, res, next) => {
 });
 
 // Handling the submit of the add searched artist to favorite list
-// Req.body should contain 1 property called mbid which is a string - the music brainz id of the artist.
+// Req.body should contain 1 property called mbid which is a string - the
+// music brainz id of the artist.
 // if the artist is in the local db and updated within the last 24 hours then
 // route returns the local db copy. Otherwise it queries bandsintown and inserts
-// or updates the record in the local db then adds to the artists_users table then returns the artist.
+// or updates the record in the local db then adds to the
+// artists_users table then returns the artist.
 router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
   const userId = req.session.userId;
   const { mbid } = req.body;
@@ -92,7 +95,7 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
             facebook_tour_dates_url: artist.facebook_tour_dates_url,
             updated_at: new Date()
           }, "*")
-          .where('id', updateArtistId)
+          .where('id', updateArtistId);
       }
 
       return knex('artists')
@@ -103,25 +106,25 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
           thumb_url: artist.thumb_url,
           facebook_page_url: artist.facebook_page_url,
           facebook_tour_dates_url: artist.facebook_tour_dates_url
-        }, "*")
+        }, "*");
     })
     .then((artists) => {
       return artists[0];
     })
     .catch((err) => {
       if (err.artist) {
-
-        return err.artist
+        return err.artist;
       }
 
       throw err;
     })
     .then((artist) => {
       artistResult = artist;
+
       return knex('artists_users')
         .select()
         .where('user_id', userId)
-        .andWhere('artist_id', artist.id)
+        .andWhere('artist_id', artist.id);
     })
     .then((favorites) => {
       if (favorites.length > 0) {
@@ -157,7 +160,8 @@ router.delete('/users/artists', checkAuth, ev(val.delete), (req, res, next) => {
   let artist;
 
   knex('artists_users')
-    .select('mbid', 'name', 'image_url', 'thumb_url', 'facebook_page_url', 'facebook_tour_dates_url')
+    .select('mbid', 'name', 'image_url', 'thumb_url', 'facebook_page_url',
+    'facebook_tour_dates_url')
     .where('artists_users.id', id)
     .join('artists', 'artists_users.artist_id', 'artists.id')
     .then((deletedArtists) => {
@@ -173,7 +177,7 @@ router.delete('/users/artists', checkAuth, ev(val.delete), (req, res, next) => {
 
       return knex('artists_users')
         .del()
-        .where('id', id)
+        .where('id', id);
     })
     .then((count) => {
       return res.send(artist);
