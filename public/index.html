@@ -42,11 +42,10 @@
         <div class="container">
           <br><br>
           <div class="row z-depth-3">
-            <form class="col s12">
+            <form id="form-search" class="col s12">
               <div class="row artist-bar white">
                 <div class="row">
                   <h4 class="header center black-text">Search for concerts by your favorite artist</h4>
-                  <!-- <div class="divider col s10 offset-s1 red"></div> -->
                 </div>
                 <div class="input-field col s6">
                   <input class="black-text invalid" id="artist-search" autofocus type="text">
@@ -57,9 +56,8 @@
                   <label for="city-search">City</label>
                 </div>
                 <div class="input-field col s3">
-                  <!-- <i class="material-icons prefix">landscape</i> -->
-                  <select id="state-search" class="black-text exclude">
-                    <option value="null" disabled selected></option>
+                  <select id="state-search" class="black-text">
+                    <option value="" disabled="disabled" selected="selected"></option>
                     <option value="AL">AL</option>
                     <option value="AK">AK</option>
                     <option value="AZ">AZ</option>
@@ -111,13 +109,13 @@
                     <option value="WI">WI</option>
                     <option value="WY">WY</option>
                   </select>
-                  <label class="select-label">State</label>
+                  <label class="select-label" for="state-search">State</label>
                 </div>
               </div>
             </form>
           </div>
           <div class="row center">
-            <a href="#" id="submit-search" class="btn-large waves-effect waves-light red darken-3 grey-text text-lighten-2 z-depth-3">search<i class="material-icons right">search</i></a>
+            <button for="form-search" type="submit" href="#" id="submit-search" class="btn-large waves-effect waves-light red darken-3 grey-text text-lighten-2 z-depth-3">search<i class="material-icons right">search</i></button>
           </div>
           <br><br>
         </div>
@@ -147,11 +145,11 @@
         <p>
           <form>
             <div class="row input-field col s12">
-              <input id="username-login" type="text" class="validate">
+              <input id="username-login" type="text" class="invalid">
               <label class="active" for="username-login">Username</label>
             </div>
             <div class="row input-field col s12">
-              <input id="password-login" type="password" class="validate">
+              <input id="password-login" type="password" class="invalid">
               <label class="active" for="password-login">Password</label>
             </div>
             <a href="#!" class="modal-action btn waves-effect waves-light red darken-3">Login<i class="material-icons right">send</i></a>
@@ -187,8 +185,7 @@
             <div class="input-field col s6">
               <!-- <i class="material-icons prefix">landscape</i> -->
               <select id="state">
-                <!-- <option value="" disabled selected>Select your search radius</option> -->
-                <option id="exclude" value="" disabled selected>Select your state</option>
+                <option value="" disabled="disabled" selected="selected"></option>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -254,15 +251,11 @@
               </select>
               <label>Radius (miles)</label>
             </div>
-            <!-- <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-              <i class="material-icons right">send</i>
-            </button> -->
           </form>
           <a href="#!" class="modal-action btn waves-effect waves-light red darken-3">Register<i class="material-icons right">send</i></a>
         </div>
       </div>
     </div>
-
 
     <!--Import jQuery before materialize.js-->
     <script src="js/libraries/jquery-2.2.4.min.js"></script>

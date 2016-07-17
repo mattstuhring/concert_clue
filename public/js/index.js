@@ -3,6 +3,7 @@
 // IFFE to protect global scope - Must be at top of file.
 (function () {
   let events = [];
+  let state = 0;
 
   const buildCookie = function() {
     window.COOKIES = {};
@@ -39,22 +40,11 @@
   };
 
   const validateSignup = function() {
-    const username = $('#username').val().trim();
-    const password = $('#password').val().trim();
-    const city = $('#city').val().trim();
-    let state = $('#state').val();
-    let radius = $('#radius').val();
-
-    if (state === null) {
-      state = '';
-    }
-
-    if (radius === null) {
-      radius = '';
-    }
-
-    state = state.trim();
-    radius = radius.trim();
+    const username = ($('#username').val() || '').trim();
+    const password = ($('#password').val() || '').trim();
+    const city = ($('#city').val() || '').trim();
+    let state = ($('#state').val() || '').trim();
+    let radius = ($('#radius').val() || '').trim();
 
     if (!validateUserName(username)) {
       return false;
@@ -84,9 +74,9 @@
 
   const registerUser = function() {
     if (validateSignup()) {
-      const username = $('#username').val().trim();
-      const password = $('#password').val().trim();
-      const city = $('#city').val().trim();
+      const username = ($('#username').val() || '').trim();
+      const password = ($('#password').val() || '').trim();
+      const city = ($('#city').val() || '').trim();
       let state = $('#state').val();
       let radius = Number.parseInt($('#radius').val());
 
@@ -102,9 +92,7 @@
       const $xhr = $.ajax({
         method: 'POST',
         url: '/users/',
-        // dataType: 'json',
         contentType: 'application/json',
-        // data: '{"title": "Frozen 2: The Thaw", "rating": 6.8}'
         data: JSON.stringify(newUser)
       });
 
@@ -145,12 +133,12 @@
   };
 
   const loginUser = function() {
-    const username = $('#username-login').val().trim();
-    const password = $('#password-login').val().trim();
+    const username = ($('#username-login').val() || '').trim();
+    const password = ($('#password-login').val() || '').trim();
 
     if (!(validateUserName(username) && validatePassword(password))) {
 
-      return $('#register-user').openModal();
+      return $('#login-user').openModal();
     }
 
     $.ajax({
@@ -164,7 +152,7 @@
       window.location.href = '/main.html';
     })
     .fail(() => {
-      Materialize.toast('Login failure', 3000, 'rounded');
+      Materialize.toast('User name or password not correct', 3000, 'rounded');
     });
 
   };
@@ -212,9 +200,9 @@
   };
 
   const searchArtist = function(event) {
-    const artist = $('#artist-search').val().trim().toLowerCase();
-    const city = $('#city-search').val().trim();
-    const state = $('#state-search').val().trim();
+    const artist = ($('#artist-search').val() || '').trim().toLowerCase();
+    const city = ($('#city-search').val() || '').trim();
+    const state = ($('#state-search').val() || '').trim();
     const radius = 150;
 
     if (!validateSearch(artist, city, state)) {
@@ -260,8 +248,9 @@
 
   const validateNotEmpty = function(event) {
     const $target = $(event.target);
+    const value = ($target.val() || '').trim();
 
-    if ($target.val().trim() === '') {
+    if (value === '') {
       $target.addClass('invalid');
       $target.removeClass('valid');
     }
@@ -276,23 +265,77 @@
     const $select = $('.select-wrapper input.select-dropdown');
 
     if ($target.val().trim() === '') {
+      $('.select-wrapper+label').removeClass('valid');
       $select.addClass('invalid');
       $select.removeClass('valid');
     }
     else {
+      $('.select-wrapper+label').addClass('valid');
       $select.addClass('valid');
       $select.removeClass('invalid');
     }
   };
 
-  const checkSearch = function(event) {
-    if (event.keyCode === 13) {
+  const checkSubmit = function(event) {
+    if (event.keyCode !== 13) {
+      return;
+    }
+
+    if (state === 0) {
       searchArtist();
+    }
+
+    if (state === 1) {
+      loginUser();
+    }
+
+    if (state === 2) {
+      registerUser();
     }
   };
 
-  const setupLogin = function(event) {
-    $('#username-login').attr('autofocus', true);
+  const openLogin = function() {
+    state = 1;
+  };
+
+  const closeLogin = function() {
+    state = 0;
+  };
+
+  const openSignup = function() {
+    state = 2;
+  };
+
+  const closeSignup = function() {
+    state = 0;
+  };
+
+  const checkLoginUserName = function(event) {
+    const $target = $(event.target);
+    const username = ($target.val() || '').trim();
+
+    if (username.length < 6) {
+      $target.addClass('invalid');
+      $target.removeClass('valid');
+    }
+    else {
+      $target.addClass('valid');
+      $target.removeClass('invalid');
+    }
+  };
+
+  const checkLoginPassword = function(event) {
+    const $target = $(event.target);
+    const password = ($target.val() || '').trim();
+
+    if (password.length < 8) {
+      $target.addClass('invalid');
+      $target.removeClass('valid');
+    }
+    else {
+      $target.addClass('valid');
+      $target.removeClass('invalid');
+    }
   };
 
 // ****************** Establish event listeners / Immediate execution
@@ -305,29 +348,30 @@
     opacity: .5,
     in_duration: 300,
     out_duration: 200,
-    ready: null,
-    complete: null
+    ready: openSignup,
+    complete: closeSignup
   });
   $('.modal-trigger.login').leanModal({
     dismissible: true,
     opacity: .5,
     in_duration: 300,
     out_duration: 200,
-    ready: setupLogin,
-    complete: null
+    ready: openLogin,
+    complete: closeLogin
   });
   $('select').material_select();
-
   $(window).scroll(function() {
     $('#top').toggle($(document).scrollTop() > 300);
   });
-
   $('#register-user .modal-action').on('click', registerUser);
   $('#login-user .modal-action').on('click', loginUser);
   $('#submit-search').on('click', searchArtist);
   $('#city-search, #artist-search').on('keyup', validateNotEmpty);
-  $('#city-search, #artist-search, #state-search').on('keyup', checkSearch);
+  $('body').on('keyup', checkSubmit);
   $('#state-search').on('change', validateStateNotEmpty);
   $('.select-wrapper input.select-dropdown').addClass('invalid');
+  $('#username-login').on('keyup', checkLoginUserName);
+  $('#password-login').on('keyup', checkLoginPassword);
+
 // End IFFE - Must be at bottom of file.
 })();

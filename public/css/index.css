@@ -126,7 +126,7 @@ footer.page-footer {
 .input-field label.active {
   position: absolute;
   top: -14px;
-  color: #aaa
+  color: #666;
 }
 
 /* input, select, and label styling */
@@ -175,12 +175,16 @@ footer.page-footer {
      color: #666;
    }
 
-   /*#select-state.invalid {
-     border-bottom: 1px solid #ee6e73;
-     box-shadow: 0 1px 0 0 #ee6e73;
+   .select-wrapper+label {
+     position: absolute;
+     top: .8rem;
+     color: #ee6e73;
+     font-size: 1rem;
    }
 
-   #select-state.valid {
-     border-bottom: 1px solid #ee6e73;
-     box-shadow: 0 1px 0 0 #ee6e73;
-   }*/
+   .select-wrapper+label.valid {
+     position: absolute;
+     top: -14px;
+     color: #666;
+     font-size: .8rem;
+   }
