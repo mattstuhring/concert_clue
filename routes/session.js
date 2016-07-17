@@ -1,6 +1,8 @@
 'use strict';
 
 const express = require('express');
+
+// eslint-disable-next-line new-cap
 const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
@@ -23,9 +25,9 @@ router.post('/session', ev(validations.post), (req, res, next) => {
       }
 
       user = userRow;
-      const hashed_password = user.hashed_password;
+      const hashedPassword = user.hashed_password;
 
-      return bcrypt.compare(password, hashed_password);
+      return bcrypt.compare(password, hashedPassword);
     })
     .then(() => {
       req.session.userId = user.id;

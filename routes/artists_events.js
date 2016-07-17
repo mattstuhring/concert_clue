@@ -1,8 +1,9 @@
 'use strict';
 
 const express = require('express');
+
+// eslint-disable-next-line new-cap
 const router = express.Router();
-const knex = require('../knex');
 const ev = require('express-validation');
 const validations = require('../validations/joiartists_events');
 const genEventsQuery = require('../modules/utils').genEventsQuery;
@@ -15,7 +16,6 @@ router.post('/artists/events', ev(validations.get), (req, res, next) => {
   const eventsURL = 'http://api.bandsintown.com/events/search?api_version=2.0';
   const appId = 'CHADTEST';
 
-  // console.log(req.body);
   if (!artists) {
     const err = new Error();
 
@@ -30,17 +30,7 @@ router.post('/artists/events', ev(validations.get), (req, res, next) => {
   };
 
   rp(options)
-    .then((events) => {
-      // if (events.length === 0) {
-      //   const err = new Error();
-      //
-      //   err.status = 404;
-      //
-      //   throw err;
-      // }
-
-      return res.send(events);
-    })
+    .then((events) => res.send(events))
     .catch((err) => {
       if (err.statusCode === 404) {
         err.status = 404;

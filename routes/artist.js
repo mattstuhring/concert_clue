@@ -1,6 +1,8 @@
 'use strict';
 
 const express = require('express');
+
+// eslint-disable-next-line new-cap
 const router = express.Router();
 const knex = require('../knex');
 const ev = require('express-validation');
@@ -34,11 +36,11 @@ router.post('/artist', ev(validations.post), (req, res, next) => {
 
       return rp(options);
     })
-    .then((artist) => {
-      delete artist.tracker_count;
-      delete artist.upcoming_event_count;
+    .then((artistFromBIT) => {
+      delete artistFromBIT.tracker_count;
+      delete artistFromBIT.upcoming_event_count;
 
-      return res.send(artist);
+      return res.send(artistFromBIT);
     })
     .catch((err) => {
       if (err.artist) {

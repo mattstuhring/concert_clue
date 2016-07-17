@@ -1,4 +1,6 @@
 'use strict';
+
+// eslint-disable-next-line max-statements
 (function() {
   let favorites = [];
   let events = [];
@@ -13,6 +15,7 @@
   });
 
   const buildFavorites = function() {
+    // eslint-disable-next-line no-undef
     favorites = _.sortBy(favorites, (fav) => fav.name);
     const $favart = $('.favart');
 
@@ -37,6 +40,8 @@
     const $eventAddCard = $('.eventAddCard');
 
     $eventAddCard.children().remove();
+
+  /* eslint-disable */
     for (const event of events) {
       $eventAddCard.append(`<div class="col s12 barley valign-wrapper
       z-depth-3">
@@ -50,6 +55,8 @@
         </div>
       </div>`);
     }
+
+  /* eslint-enable */
   };
 
   const logout = function() {
@@ -103,19 +110,20 @@
           })
         })
         .done((localEvents) => {
+          // eslint-disable-next-line no-undef
           events = _.sortBy(localEvents, (object) => object.datetime);
           buildEvents();
         })
-        .fail((err) => {
-          Materialize.toast('We are here', 3000, 'rounded');
+        .fail(() => {
+          Materialize.toast('Server error', 3000, 'rounded');
         });
       })
-      .fail((err) => {
-        Materialize.toast('We are fail', 3000, 'rounded');
+      .fail(() => {
+        Materialize.toast('Server error', 3000, 'rounded');
       });
     })
     .fail(() => {
-      Materialize.toast('Is everything hooked up alright?', 3000, 'rounded');
+      Materialize.toast('Server error', 3000, 'rounded');
     });
   };
 
@@ -138,7 +146,7 @@
       data: JSON.stringify({ ccauid })
     });
 
-    $xhr.done((data) => {
+    $xhr.done(() => {
       favorites.splice(index, 1);
       buildFavorites();
       const artistNames = favorites.map((art) => art.name);
@@ -168,6 +176,7 @@
           })
         })
         .done((localEvents) => {
+          // eslint-disable-next-line no-undef
           events = _.sortBy(localEvents, (object) => object.datetime);
           buildEvents();
         })
@@ -225,7 +234,7 @@
   );
   };
 
-  const search = function(event) {
+  const search = function() {
     const $search = $('#search');
     const searchTextNow = $search.val().trim().toLowerCase();
 
@@ -253,8 +262,8 @@
         contentType: 'application/json'
       });
 
-      $xhr.done((data) => {
-        const { city, state, radius } = data;
+      $xhr.done((userData) => {
+        const { city, state, radius } = userData;
 
         const $xhrin = $.ajax({
           method: 'POST',
@@ -268,15 +277,16 @@
           })
         });
 
-        $xhrin.done((data) => {
-          if (data.length === 0) {
+        $xhrin.done((artistsEvents) => {
+          if (artistsEvents.length === 0) {
             events = [];
             buildEvents();
 
             return Materialize.toast('No upcoming shows', 3000, 'rounded');
           }
 
-          events = _.sortBy(data, (object) => object.datetime);
+          // eslint-disable-next-line no-undef
+          events = _.sortBy(artistsEvents, (object) => object.datetime);
           buildEvents();
         });
 
@@ -289,7 +299,7 @@
         });
       });
 
-      $xhr.fail((err) => {
+      $xhr.fail(() => {
         Materialize.toast('Try again?', 3000, 'rounded');
       });
     });
@@ -337,15 +347,16 @@
           })
         });
 
-        $xhrp.done((data) => {
-          if (data.length === 0) {
+        $xhrp.done((artistsEvents) => {
+          if (artistsEvents.length === 0) {
             events = [];
             buildEvents();
 
             return Materialize.toast('No upcoming shows', 3000, 'rounded');
           }
 
-          events = _.sortBy(data, (object) => object.datetime);
+          // eslint-disable-next-line no-undef
+          events = _.sortBy(artistsEvents, (object) => object.datetime);
           buildEvents();
         });
 
@@ -358,7 +369,7 @@
         });
       });
 
-      $xhr.fail((err) => {
+      $xhr.fail(() => {
         Materialize.toast('Try again?', 3000, 'rounded');
       });
     })
@@ -370,7 +381,7 @@
     });
   };
 
-  const showFavorites = function(event) {
+  const showFavorites = function() {
     const $xhr = $.ajax({
       method: 'GET',
       url: '/users',
@@ -392,15 +403,16 @@
         })
       });
 
-      $xhrzin.done((data) => {
-        if (data.length === 0) {
+      $xhrzin.done((artistsEvents) => {
+        if (artistsEvents.length === 0) {
           events = [];
           buildEvents();
 
           return Materialize.toast('No upcoming shows', 3000, 'rounded');
         }
 
-        events = _.sortBy(data, (object) => object.datetime);
+        // eslint-disable-next-line no-undef
+        events = _.sortBy(artistsEvents, (object) => object.datetime);
         buildEvents();
       });
 
@@ -413,7 +425,7 @@
       });
     });
 
-    $xhr.fail((err) => {
+    $xhr.fail(() => {
       Materialize.toast('Try again?', 3000, 'rounded');
     });
   };

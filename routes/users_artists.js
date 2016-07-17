@@ -1,6 +1,8 @@
 'use strict';
 
 const express = require('express');
+
+// eslint-disable-next-line new-cap
 const router = express.Router();
 const knex = require('../knex');
 const ev = require('express-validation');
@@ -34,9 +36,7 @@ router.get('/users/artists', checkAuth, (req, res, next) => {
     'thumb_url', 'facebook_page_url', 'facebook_tour_dates_url')
     .where('user_id', userId)
     .innerJoin('artists', 'artists_users.artist_id', 'artists.id')
-    .then((favorites) => {
-      return res.send(favorites);
-    })
+    .then((favorites) => res.send(favorites))
     .catch((err) => {
       next(err);
     });
@@ -86,6 +86,8 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
     .then((artist) => {
       if (updateArtistId) {
         return knex('artists')
+
+        /*eslint-disable */
           .update({
             mbid: artist.mbid,
             name: artist.name,
@@ -95,10 +97,14 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
             facebook_tour_dates_url: artist.facebook_tour_dates_url,
             updated_at: new Date()
           }, "*")
+
+        /*eslint-enable */
           .where('id', updateArtistId);
       }
 
       return knex('artists')
+
+      /*eslint-disable */
         .insert({
           mbid: artist.mbid,
           name: artist.name,
@@ -107,10 +113,10 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
           facebook_page_url: artist.facebook_page_url,
           facebook_tour_dates_url: artist.facebook_tour_dates_url
         }, "*");
+
+      /*eslint-enable */
     })
-    .then((artists) => {
-      return artists[0];
-    })
+    .then((artists) => artists[0])
     .catch((err) => {
       if (err.artist) {
         return err.artist;
@@ -136,10 +142,14 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
       }
 
       return knex('artists_users')
+
+      /*eslint-disable */
         .insert({
           user_id: userId,
           artist_id: artistResult.id
         }, "*");
+
+      /*eslint-enable */
     })
     .then((artistUsers) => {
       delete artistResult.created_at;
@@ -179,9 +189,7 @@ router.delete('/users/artists', checkAuth, ev(val.delete), (req, res, next) => {
         .del()
         .where('id', id);
     })
-    .then((count) => {
-      return res.send(artist);
-    })
+    .then(() => res.send(artist))
     .catch((err) => {
       next(err);
     });

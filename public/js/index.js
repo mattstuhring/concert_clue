@@ -1,9 +1,11 @@
 'use strict';
 
 // IFFE to protect global scope - Must be at top of file.
+
+// eslint-disable-next-line max-statements
 (function() {
   let events = [];
-  let state = 0;
+  let windowState = 0;
 
   const buildCookie = function() {
     window.COOKIES = {};
@@ -41,6 +43,12 @@
     return true;
   };
 
+  const toast = function(message, time, type) {
+    Materialize.toast(message, time, type);
+
+    return false;
+  };
+
   const validateSignup = function() {
     const username = ($('#username').val() || '').trim();
     const password = ($('#password').val() || '').trim();
@@ -48,30 +56,20 @@
     const state = ($('#state').val() || '').trim();
     const radius = ($('#radius').val() || '').trim();
 
-    if (!validateUserName(username)) {
-      return false;
-    }
-
-    if (!validatePassword(password)) {
+    if (!validateUserName(username) || !validatePassword(password)) {
       return false;
     }
 
     if (city === '' || city.length > 255) {
-      Materialize.toast('City name required', 3000, 'rounded');
-
-      return false;
+      return toast('City name required', 3000, 'rounded');
     }
 
     if (state === '') {
-      Materialize.toast('State required', 3000, 'rounded');
-
-      return false;
+      return toast('State required', 3000, 'rounded');
     }
 
     if (radius === '') {
-      Materialize.toast('Radius required', 3000, 'rounded');
-
-      return false;
+      return toast('Radius required', 3000, 'rounded');
     }
 
     return true;
@@ -85,6 +83,7 @@
       const state = $('#state').val();
       const radius = Number.parseInt($('#radius').val());
 
+      /*eslint-disable */
       const newUser = {
         user_name: username,
         password,
@@ -92,6 +91,8 @@
         state,
         radius
       };
+
+      /*eslint-enable */
 
       let failed;
       const $xhr = $.ajax({
@@ -101,7 +102,7 @@
         data: JSON.stringify(newUser)
       });
 
-      $xhr.done((data) => {
+      $xhr.done(() => {
         const loggedInUser = { username, password };
 
         $.ajax({
@@ -110,7 +111,7 @@
           contentType: 'application/json',
           data: JSON.stringify(loggedInUser)
         })
-        .done((data) => {
+        .done(() => {
           window.location.href = '/main.html';
         })
         .fail(() => {
@@ -120,17 +121,17 @@
       })
       .fail((err) => {
         if (err.status === 401 &&
-          err.responseText === "Username already exists") {
+          err.responseText === 'Username already exists') {
           Materialize.toast('User name already exists', 3000, 'rounded');
           failed = true;
         }
       });
 
-      if (!failed) {
-        $('#register-user').closeModal();
+      if (failed) {
+        $('#register-user').openModal();
       }
       else {
-        $('#register-user').openModal();
+        $('#register-user').closeModal();
       }
     }
     else {
@@ -168,6 +169,7 @@
     const $row = $eventContainer.children().first();
 
     for (const event of events) {
+      /* eslint-disable */
       $row.append(`
         <div class="col s12 barley valign-wrapper z-depth-3">
           <div class="hops valign">
@@ -180,32 +182,28 @@
           </div>
         </div>
       `);
+
+      /* eslint-enable */
     }
   };
 
   const validateSearch = function(artist, city, state) {
     if (!artist || artist === '') {
-      Materialize.toast('Must provide an artist', 3000, 'rounded');
-
-      return false;
+      return toast('Must provide an artist', 3000, 'rounded');
     }
 
     if (!city || city === '') {
-      Materialize.toast('Must provide a city', 3000, 'rounded');
-
-      return false;
+      return toast('Must provide a city', 3000, 'rounded');
     }
 
     if (state.length !== 2) {
-      Materialize.toast('Use two letter state code', 3000, 'rounded');
-
-      return false;
+      return toast('Use two letter state code', 3000, 'rounded');
     }
 
     return true;
   };
 
-  const searchArtist = function(event) {
+  const searchArtist = function() {
     const artist = ($('#artist-search').val() || '').trim().toLowerCase();
     const city = ($('#city-search').val() || '').trim();
     const state = ($('#state-search').val() || '').trim();
@@ -239,10 +237,9 @@
       const elemRect = element.getBoundingClientRect();
       const offset = elemRect.bottom - bodyRect.top;
 
-      $(window).scroll(function() {
+      $(window).scroll(() => {
         $('#top').toggle($(document).scrollTop() > offset - 600);
       });
-
     })
     .fail((err) => {
       if (err.status === 404) {
@@ -289,33 +286,33 @@
       return;
     }
 
-    if (state === 0) {
+    if (windowState === 0) {
       searchArtist();
     }
 
-    if (state === 1) {
+    if (windowState === 1) {
       loginUser();
     }
 
-    if (state === 2) {
+    if (windowState === 2) {
       registerUser();
     }
   };
 
   const openLogin = function() {
-    state = 1;
+    windowState = 1;
   };
 
   const closeLogin = function() {
-    state = 0;
+    windowState = 0;
   };
 
   const openSignup = function() {
-    state = 2;
+    windowState = 2;
   };
 
   const closeSignup = function() {
-    state = 0;
+    windowState = 0;
   };
 
   const checkLoginUserName = function(event) {
@@ -351,6 +348,8 @@
   $('select').material_select();
   $('.button-collapse').sideNav();
   $('.parallax').parallax();
+
+  /* eslint-disable */
   $('.modal-trigger.signup').leanModal({
     dismissible: true,
     opacity: 0.5,
@@ -367,8 +366,10 @@
     ready: openLogin,
     complete: closeLogin
   });
+
+  /* eslint-enable */
   $('select').material_select();
-  $(window).scroll(function() {
+  $(window).scroll(() => {
     $('#top').toggle($(document).scrollTop() > 300);
   });
   $('#register-user .modal-action').on('click', registerUser);

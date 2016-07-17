@@ -1,6 +1,8 @@
 'use strict';
 
 const express = require('express');
+
+// eslint-disable-next-line new-cap
 const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
@@ -22,11 +24,11 @@ const checkAuth = function(req, res, next) {
 // Req.body must contain user_name, password, city, state, and radius.
 router.post('/users', ev(validations.post), (req, res, next) => {
   const newUser = req.body;
-  const { user_name, password } = newUser;
+  const { userName, password } = newUser;
 
   knex('users')
     .select(knex.raw('1=1'))
-    .where('user_name', user_name)
+    .where('user_name', userName)
     .first()
     .then((exists) => {
       if (exists) {
@@ -38,20 +40,20 @@ router.post('/users', ev(validations.post), (req, res, next) => {
 
       return bcrypt.hash(password, 12);
     })
-    .then((hashed_password) => {
-      return knex('users').insert({
-        user_name,
-        hashed_password,
+
+    /*eslint-disable */
+    .then((hashedPassword) => knex('users').insert({
+        user_name: userName,
+        hashed_password: hashedPassword,
         first_name: newUser.first_name,
         last_name: newUser.last_name,
         city: newUser.city,
         state: newUser.state,
         radius: newUser.radius
-      }, '*');
-    })
-    .then(() => {
-      return res.sendStatus(200);
-    })
+      }, '*'))
+
+    /*eslint-enable */
+    .then(() => res.sendStatus(200))
     .catch((err) => {
       next(err);
     });
@@ -65,9 +67,7 @@ router.get('/users', checkAuth, (req, res, next) => {
      'email')
     .where('id', userId)
     .first()
-    .then((user) => {
-      return res.send(user);
-    })
+    .then((user) => res.send(user))
     .catch((err) => {
       next(err);
     });
