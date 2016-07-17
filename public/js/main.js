@@ -91,7 +91,6 @@
         city = user.city;
         state = user.state;
         radius = user.radius;
-
         $.ajax({
           method: 'POST',
           url: '/artists/events/',
@@ -107,12 +106,13 @@
           events = _.sortBy(localEvents, (object) => object.datetime);
           buildEvents();
         })
-        .fail(
-          Materialize.toast('We are here', 3000, 'rounded')
-        );
+        .fail((err) => {
+          Materialize.toast('We are here', 3000, 'rounded');
+        });
       })
-      .fail(Materialize.toast('We are fail', 3000, 'rounded')
-      );
+      .fail((err) => {
+        Materialize.toast('We are fail', 3000, 'rounded');
+      });
     })
     .fail(() => {
       Materialize.toast('Is everything hooked up alright?', 3000, 'rounded');
