@@ -325,7 +325,7 @@
       $xhr.done((data) => {
         const { city, state, radius } = data;
         const faveNames = favorites.map((arts) => arts.name);
-        const $xhr = $.ajax({
+        const $xhrp = $.ajax({
           method: 'POST',
           url: '/artists/events',
           contentType: 'application/json',
@@ -337,7 +337,7 @@
           })
         });
 
-        $xhr.done((data) => {
+        $xhrp.done((data) => {
           if (data.length === 0) {
             events = [];
             buildEvents();
@@ -349,7 +349,7 @@
           buildEvents();
         });
 
-        $xhr.fail((err) => {
+        $xhrp.fail((err) => {
           if (err.status === 404) {
             return Materialize.toast('Artist not found', 3000, 'rounded');
           }
