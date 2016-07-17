@@ -1,7 +1,7 @@
 'use strict';
 
 // IFFE to protect global scope - Must be at top of file.
-(function () {
+(function() {
   let events = [];
   let state = 0;
 
@@ -24,6 +24,7 @@
   const validateUserName = function(username) {
     if (username.length < 6 || username.length > 255) {
       Materialize.toast('User name must be at least 6', 3000, 'rounded');
+
       return false;
     }
 
@@ -33,6 +34,7 @@
   const validatePassword = function(password) {
     if (password.length < 8 || password.length > 255) {
       Materialize.toast('Password length must be 8 or more', 3000, 'rounded');
+
       return false;
     }
 
@@ -43,8 +45,8 @@
     const username = ($('#username').val() || '').trim();
     const password = ($('#password').val() || '').trim();
     const city = ($('#city').val() || '').trim();
-    let state = ($('#state').val() || '').trim();
-    let radius = ($('#radius').val() || '').trim();
+    const state = ($('#state').val() || '').trim();
+    const radius = ($('#radius').val() || '').trim();
 
     if (!validateUserName(username)) {
       return false;
@@ -56,16 +58,19 @@
 
     if (city === '' || city.length > 255) {
       Materialize.toast('City name required', 3000, 'rounded');
+
       return false;
     }
 
     if (state === '') {
       Materialize.toast('State required', 3000, 'rounded');
+
       return false;
     }
 
     if (radius === '') {
       Materialize.toast('Radius required', 3000, 'rounded');
+
       return false;
     }
 
@@ -77,15 +82,15 @@
       const username = ($('#username').val() || '').trim();
       const password = ($('#password').val() || '').trim();
       const city = ($('#city').val() || '').trim();
-      let state = $('#state').val();
-      let radius = Number.parseInt($('#radius').val());
+      const state = $('#state').val();
+      const radius = Number.parseInt($('#radius').val());
 
       const newUser = {
         user_name: username,
-        password: password,
-        city: city,
-        state: state,
-        radius: radius
+        password,
+        city,
+        state,
+        radius
       };
 
       let failed;
@@ -98,6 +103,7 @@
 
       $xhr.done((data) => {
         const loggedInUser = { username, password };
+
         $.ajax({
           method: 'POST',
           url: '/session/',
@@ -137,7 +143,6 @@
     const password = ($('#password-login').val() || '').trim();
 
     if (!(validateUserName(username) && validatePassword(password))) {
-
       return $('#login-user').openModal();
     }
 
@@ -154,17 +159,15 @@
     .fail(() => {
       Materialize.toast('User name or password not correct', 3000, 'rounded');
     });
-
   };
-
   const buildEvents = function() {
     const $eventContainer = $('#event-container');
 
     $eventContainer.children().remove();
     $eventContainer.append('<div class="row"></div>');
     const $row = $eventContainer.children().first();
-    for(const event of events) {
-      console.log(event);
+
+    for (const event of events) {
       $row.append(`
         <div class="col s12 barley valign-wrapper z-depth-3">
           <div class="hops valign">
@@ -183,16 +186,19 @@
   const validateSearch = function(artist, city, state) {
     if (!artist || artist === '') {
       Materialize.toast('Must provide an artist', 3000, 'rounded');
+
       return false;
     }
 
     if (!city || city === '') {
       Materialize.toast('Must provide a city', 3000, 'rounded');
+
       return false;
     }
 
     if (state.length !== 2) {
       Materialize.toast('Use two letter state code', 3000, 'rounded');
+
       return false;
     }
 
@@ -215,9 +221,9 @@
       contentType: 'application/json',
       data: JSON.stringify({
         artists: [artist],
-        city: city,
-        state: state,
-        radius: radius
+        city,
+        state,
+        radius
       })
     })
     .done((data) => {
@@ -232,6 +238,7 @@
       const element = $eventContainer.children().last()[0];
       const elemRect = element.getBoundingClientRect();
       const offset = elemRect.bottom - bodyRect.top;
+
       $(window).scroll(function() {
         $('#top').toggle($(document).scrollTop() > offset - 600);
       });
@@ -241,6 +248,7 @@
       if (err.status === 404) {
         const text = err.responseText.substr(6, err.responseText.length);
         const parsedErrors = JSON.parse(text);
+
         Materialize.toast(parsedErrors.errors.join(', '), 3000, 'rounded');
       }
     });
@@ -258,7 +266,7 @@
       $target.addClass('valid');
       $target.removeClass('invalid');
     }
-  }
+  };
 
   const validateStateNotEmpty = function(event) {
     const $target = $(event.target);
@@ -345,7 +353,7 @@
   $('.parallax').parallax();
   $('.modal-trigger.signup').leanModal({
     dismissible: true,
-    opacity: .5,
+    opacity: 0.5,
     in_duration: 300,
     out_duration: 200,
     ready: openSignup,
@@ -353,7 +361,7 @@
   });
   $('.modal-trigger.login').leanModal({
     dismissible: true,
-    opacity: .5,
+    opacity: 0.5,
     in_duration: 300,
     out_duration: 200,
     ready: openLogin,
