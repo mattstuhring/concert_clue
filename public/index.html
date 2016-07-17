@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="grey lighten-3">
+<html lang="en" class="grey lighten-3">
   <head>
     <meta charset="utf-8">
     <title>Concert Clue</title>
@@ -23,7 +23,7 @@
     <div class="navbar-fixed z-depth-3">
       <nav class="red darken-3" role="navigation">
         <div class="nav-wrapper">
-          <a id="logo-container" href="#" class="brand-logo left col s12 m6 l3"><img class="logo" src="images/logo.jpg" alt="" /></a>
+          <a id="logo-container" href="#" class="brand-logo left col s12 m6 l3"><img class="logo" src="images/logo.jpg" alt=""/></a>
           <ul class="right col s12 m6 l3">
 
             <!-- Modal Trigger Login -->
@@ -32,6 +32,7 @@
             <!-- Modal Trigger Signup -->
             <li><a class="waves-effect waves-light btn modal-trigger signup black grey-text text-lighten-2 z-depth-3" href="#register-user">Signup</a></li>
           </ul>
+        </div>
       </nav>
     </div>
 
@@ -57,7 +58,7 @@
                 </div>
                 <div class="input-field col s3">
                   <select id="state-search" class="black-text">
-                    <option value="" disabled="disabled" selected="selected"></option>
+                    <option value="" label=" " disabled="disabled" selected="selected"></option>
                     <option value="AL">AL</option>
                     <option value="AK">AK</option>
                     <option value="AZ">AZ</option>
@@ -115,7 +116,7 @@
             </form>
           </div>
           <div class="row center">
-            <button for="form-search" type="submit" href="#" id="submit-search" class="btn-large waves-effect waves-light red darken-3 grey-text text-lighten-2 z-depth-3">search<i class="material-icons right">search</i></button>
+            <button for="form-search" type="submit" id="submit-search" class="btn-large waves-effect waves-light red darken-3 grey-text text-lighten-2 z-depth-3">search<i class="material-icons right">search</i></button>
           </div>
           <br><br>
         </div>
@@ -135,14 +136,13 @@
     </div>
 
     <div id="top" class="page-footer">
-      <div><img class="responsive-img" src="images/crowd.jpg"/></div>
+      <div><img class="responsive-img" src="images/crowd.jpg" alt="background"/></div>
     </div>
 
     <!-- Modal Structure Nav-bar -->
     <div id="login-user" class="modal">
       <div class="modal-content">
         <h4 class="center">Login</h4>
-        <p>
           <form>
             <div class="row input-field col s12">
               <input id="username-login" type="text" class="invalid">
@@ -154,7 +154,6 @@
             </div>
             <a href="#!" class="modal-action btn waves-effect waves-light red darken-3">Login<i class="material-icons right">send</i></a>
           </form>
-        </p>
       </div>
     </div>
 
@@ -163,7 +162,7 @@
       <div class="modal-content">
         <div class="row">
           <h4 class="col s12 offset-s1">Signup</h4>
-        <div/>
+        </div>
         <div class="row">
           <form class="col s12">
             <div class="input-field col s6">
@@ -185,7 +184,7 @@
             <div class="input-field col s6">
               <!-- <i class="material-icons prefix">landscape</i> -->
               <select id="state">
-                <option value="" disabled="disabled" selected="selected"></option>
+                <option value="" label="State" disabled="disabled" selected="selected"></option>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
