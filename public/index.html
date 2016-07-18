@@ -21,7 +21,7 @@
   </head>
   <body>
     <div class="navbar-fixed z-depth-3">
-      <nav class="red darken-3" role="navigation">
+      <nav class="red darken-3">
         <div class="nav-wrapper">
           <a id="logo-container" href="#" class="brand-logo left col s12 m6 l3"><img class="logo" src="images/logo.jpg" alt=""/></a>
           <ul class="right col s12 m6 l3">
@@ -116,7 +116,7 @@
             </form>
           </div>
           <div class="row center">
-            <button for="form-search" type="submit" id="submit-search" class="btn-large waves-effect waves-light red darken-3 grey-text text-lighten-2 z-depth-3">search<i class="material-icons right">search</i></button>
+            <a id="submit-search" class="btn-large waves-effect waves-light red darken-3 grey-text text-lighten-2 z-depth-3">search<i class="material-icons right">search</i></a>
           </div>
           <br><br>
         </div>
@@ -129,14 +129,16 @@
       <h2 id="banner-upcoming" class="center">Upcoming Shows</h2>
     </div>
     <!-- <div class="divider"></div> -->
-    <div id="event-parent-container container">
+    <div id="event-parent-container">
       <div id="event-container" class="section parallax-container">
         <!-- Content generated dynamically -->
       </div>
     </div>
 
     <div id="top" class="page-footer">
-      <div><img class="responsive-img" src="images/crowd.jpg" alt="background"/></div>
+      <div>
+        <img class="responsive-img" src="images/crowd.jpg" alt="background"/>
+      </div>
     </div>
 
     <!-- Modal Structure Nav-bar -->
@@ -166,7 +168,7 @@
         <div class="row">
           <form class="col s12">
             <div class="input-field col s6">
-              <input id="username" type="text" autofocus class="validate">
+              <input id="username" type="text" class="validate">
               <label for="username">Username</label>
             </div>
             <div class="input-field col s6">
@@ -177,12 +179,7 @@
               <input id="city" type="text" class="validate">
               <label for="city">City</label>
             </div>
-            <!-- <div class="row input-field col s12">
-              <input id="state" type="text" class="validate">
-              <label for="state">State</label>
-            </div> -->
             <div class="input-field col s6">
-              <!-- <i class="material-icons prefix">landscape</i> -->
               <select id="state">
                 <option value="" label="State" disabled="disabled" selected="selected"></option>
                 <option value="AL">AL</option>
