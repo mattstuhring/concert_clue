@@ -20,7 +20,7 @@ p {
   /*box-sizing: padding-box;*/
   /* 16:9 */
 	position: relative;
-  background: url('ticket.jpg') no-repeat;
+  background: url('../assets/images/ticket.jpg') no-repeat;
   background-size: 100%;
   margin-top: 10px;
 }

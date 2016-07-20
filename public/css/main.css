@@ -14,12 +14,12 @@ html, body {
 .logo {
   height: 4.3rem;
 }
+
 .img {
-  background-image: url('crowd_header.jpg');
+  background-image: url('../assets/images/crowd_header.jpg');
   background-size: contain;
   border: 1px solid black;
 }
-
 
 .barley {
 	width: 100% !important;
@@ -29,7 +29,7 @@ html, body {
   /*box-sizing: padding-box;*/
   /* 16:9 */
 	position: relative;
-  background: url('ticket.jpg') no-repeat;
+  background: url('../assets/images/ticket.jpg') no-repeat;
   background-size: 100%;
   margin-top: 10px;
 }

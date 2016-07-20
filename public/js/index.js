@@ -1,9 +1,10 @@
-'use strict';
+
 
 // IFFE to protect global scope - Must be at top of file.
-
 // eslint-disable-next-line max-statements
 (function() {
+  'use strict';
+
   let events = [];
   let windowState = 0;
 
@@ -91,9 +92,7 @@
         state,
         radius
       };
-
       /*eslint-enable */
-
       let failed;
       const $xhr = $.ajax({
         method: 'POST',
@@ -118,8 +117,9 @@
           Materialize.toast('User could not be logged in.');
           failed = true;
         });
-      })
-      .fail((err) => {
+      });
+
+      $xhr.fail((err) => {
         if (err.status === 401 &&
           err.responseText === 'Username already exists') {
           Materialize.toast('User name already exists', 3000, 'rounded');

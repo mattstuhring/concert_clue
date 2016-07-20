@@ -24,11 +24,10 @@ const checkAuth = function(req, res, next) {
 // Req.body must contain user_name, password, city, state, and radius.
 router.post('/users', ev(validations.post), (req, res, next) => {
   const newUser = req.body;
-  const { userName, password } = newUser;
 
   knex('users')
     .select(knex.raw('1=1'))
-    .where('user_name', userName)
+    .where('user_name', newUser.user_name)
     .first()
     .then((exists) => {
       if (exists) {
@@ -38,12 +37,12 @@ router.post('/users', ev(validations.post), (req, res, next) => {
         throw err;
       }
 
-      return bcrypt.hash(password, 12);
+      return bcrypt.hash(newUser.password, 12);
     })
 
     /*eslint-disable */
     .then((hashedPassword) => knex('users').insert({
-        user_name: userName,
+        user_name: newUser.user_name,
         hashed_password: hashedPassword,
         first_name: newUser.first_name,
         last_name: newUser.last_name,
