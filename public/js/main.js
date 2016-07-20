@@ -176,6 +176,7 @@
           })
         })
         .done((localEvents) => {
+
           // eslint-disable-next-line no-undef
           events = _.sortBy(localEvents, (object) => object.datetime);
           buildEvents();

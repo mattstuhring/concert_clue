@@ -1,5 +1,3 @@
-
-
 // IFFE to protect global scope - Must be at top of file.
 // eslint-disable-next-line max-statements
 (function() {
