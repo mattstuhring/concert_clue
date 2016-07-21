@@ -37,7 +37,7 @@ p {
 }
 
 .logo {
-  height: 4.3rem;
+  height: 60px;
 }
 
 .button-collapse {
@@ -73,7 +73,16 @@ p {
 
 @media only screen and (max-width : 700px) {
   nav ul a.btn {
-    margin-top: 92px;
+    margin-top: 80px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  nav ul a.btn {
+    margin-top: 64px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 0 0 5px 5px;
   }
 }
 
@@ -82,8 +91,13 @@ p {
     top: 0;
   }
 
+  .logo {
+    height: 52px;
+  }
+
   nav ul a.btn {
-    margin-top: 84px;
+    margin-top: 56px;
+    border-radius: 0 0 5px 5px;
   }
 }
 
@@ -119,15 +133,14 @@ footer.page-footer {
   }
 }
 
+.row-form {
+  margin-bottom: 0;
+}
+
 div.section.parallax-container {
   padding-bottom: 100px;
 }
 
-.input-field label.active {
-  position: absolute;
-  top: -14px;
-  color: #666;
-}
 
 /* input, select, and label styling */
    .input-field label {
@@ -137,16 +150,21 @@ div.section.parallax-container {
    .input-field input[type=text]:focus + label {
      color: #666;
    }
+   /* label focus color */
+   .input-field input[type=password]:focus + label {
+     color: #666;
+   }
    /* label underline focus color */
    .input-field input[type=text]:focus {
      border-bottom: 1px solid #000;
      box-shadow: 0 1px 0 0 #000;
    }
    /* valid color */
-   .input-field input[type=text].valid {
+   .input-field input[type=text].valid, .input-field input[type=password].valid {
      border-bottom: 1px solid #73ee6e;
      box-shadow: 0 1px 0 0 #73ee6e;
    }
+
    /* invalid color */
    .input-field input[type=text].invalid {
      border-bottom: 1px solid #ee6e73;
@@ -188,3 +206,85 @@ div.section.parallax-container {
      color: #666;
      font-size: .8rem;
    }
+
+   .input-field label.active {
+     position: absolute;
+     top: -.8rem;
+     color: #666;
+   }
+
+   .login-form .input-field label.active {
+     position: absolute;
+     top: .8rem;
+     left: 0;
+     color: #666;
+   }
+
+   .registration-form .input-field label.active {
+     position: absolute;
+     top: .8rem;
+     color: #666;
+   }
+
+
+ .hops:first-child {
+   margin-top: 30px;
+ }
+
+ .hops p {
+   padding-right: 125px;
+   font-size: 28px;
+   margin-bottom: 10px;
+ }
+
+ @media only screen and (max-width: 992px) {
+   .hops p {
+     padding-right: 80px;
+     font-size: 22px;
+     margin-bottom: 10px;
+     margin-top: 0;
+   }
+
+   .hops:first-child {
+     margin-top: 20px;
+   }
+ }
+
+ @media only screen and (max-width: 720px) {
+   .hops p {
+     padding-right: 60px;
+     font-size: 18px;
+     margin-bottom: 5px;
+     margin-top: 0;
+   }
+
+   .hops:first-child {
+     margin-top: 10px;
+   }
+ }
+
+ @media only screen and (max-width: 600px) {
+   .hops p {
+     padding-right: 80px;
+     font-size: 18px;
+     margin-bottom: 5px;
+     margin-top: 0;
+   }
+
+   .hops:first-child {
+     margin-top: 10px;
+   }
+ }
+
+ @media only screen and (max-width: 480px) {
+   .hops p {
+     padding-right: 60px;
+     font-size: 16px;
+     margin-bottom: 0;
+     margin-top: 0;
+   }
+
+   .hops:first-child {
+     margin-top: 0px;
+   }
+ }

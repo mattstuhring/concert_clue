@@ -48,15 +48,15 @@
                 <div class="row">
                   <h4 class="header center black-text">Search for concerts by your favorite artist</h4>
                 </div>
-                <div class="input-field col s6">
+                <div class="input-field col s12 m6">
                   <input class="black-text invalid" id="artist-search" autofocus type="text">
                   <label for="artist-search">Artist</label>
                 </div>
-                <div class="input-field col s3">
+                <div class="input-field col s6 m3">
                   <input class="black-text invalid" id="city-search" type="text">
                   <label for="city-search">City</label>
                 </div>
-                <div class="input-field col s3">
+                <div class="state-search-wrap input-field col s6 m3">
                   <select id="state-search" class="black-text">
                     <option value="" label=" " disabled="disabled" selected="selected"></option>
                     <option value="AL">AL</option>
@@ -142,10 +142,10 @@
     </div>
 
     <!-- Modal Structure Nav-bar -->
-    <div id="login-user" class="modal">
+    <div id="login-user" class="modal grey lighten-3">
       <div class="modal-content">
         <h4 class="center">Login</h4>
-          <form>
+          <form class="login-form">
             <div class="row input-field col s12">
               <input id="username-login" type="text" class="invalid">
               <label class="active" for="username-login">Username</label>
@@ -160,28 +160,28 @@
     </div>
 
     <!-- Modal Structure Nav-bar Signup -->
-    <div id="register-user" class="modal bottom-sheet">
+    <div id="register-user" class="modal bottom-sheet grey lighten-3">
       <div class="modal-content">
         <div class="row">
           <h4 class="col s12 offset-s1">Signup</h4>
         </div>
-        <div class="row">
-          <form class="col s12">
-            <div class="input-field col s6">
-              <input id="username" type="text" class="validate">
+        <div class="row row-form">
+          <form class="registration-form col s12">
+            <div class="input-field col s12 m6">
+              <input id="username" type="text" class="invalid">
               <label for="username">Username</label>
             </div>
-            <div class="input-field col s6">
-              <input id="password" type="password" class="validate">
+            <div class="input-field col s12 m6">
+              <input id="password" type="password" class="invalid">
               <label for="password">Password</label>
             </div>
-            <div class="input-field col s6">
-              <input id="city" type="text" class="validate">
+            <div class="input-field col s12 m4">
+              <input id="city" type="text" class="invalid">
               <label for="city">City</label>
             </div>
-            <div class="input-field col s6">
+            <div class="state-wrap input-field col s12 m4">
               <select id="state">
-                <option value="" label="State" disabled="disabled" selected="selected"></option>
+                <option value="" label=" " disabled="disabled" selected="selected"></option>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -235,14 +235,12 @@
               </select>
               <label>State</label>
             </div>
-            <div class="input-field col s12">
+            <div class="radius-wrap input-field col s12 m4">
               <select id="radius">
-                <option value="" disabled selected>Select your search radius</option>
-                <option value="25">25</option>
+                <option value="" label=" " disabled="disabled" selected="selected"></option>
                 <option value="50">50</option>
                 <option value="75">75</option>
                 <option value="100">100</option>
-                <option value="125">125</option>
                 <option value="150">150</option>
               </select>
               <label>Radius (miles)</label>

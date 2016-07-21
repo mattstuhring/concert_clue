@@ -171,8 +171,7 @@
       $row.append(`
         <div class="col s12 barley valign-wrapper z-depth-3">
           <div class="hops valign">
-            <p></p>
-            <span>${event.artists[0].name}</span>
+            <p>${event.artists[0].name}</p>
             <p>${event.venue.name}</p>
             <p>${moment(event.datetime).format(`dddd MMMM D, YYYY h:mma`)}</p>
             <p>${event.venue.city}, ${event.venue.region}</p>
@@ -236,7 +235,7 @@
       const offset = elemRect.bottom - bodyRect.top;
 
       $(window).scroll(() => {
-        $('#top').toggle($(document).scrollTop() > offset - 600);
+        $('#top').toggle($(document).scrollTop() > offset - 650);
       });
     })
     .fail((err) => {
@@ -265,18 +264,51 @@
 
   const validateStateNotEmpty = function(event) {
     const $target = $(event.target);
-    const $select = $('.select-wrapper input.select-dropdown');
+    const $select = $('.state-wrap .select-wrapper input.select-dropdown');
 
     if ($target.val().trim() === '') {
-      $('.select-wrapper+label').removeClass('valid');
+      $('.state-wrap .select-wrapper+label').removeClass('valid');
       $select.addClass('invalid');
       $select.removeClass('valid');
     }
     else {
-      $('.select-wrapper+label').addClass('valid');
+      $('.state-wrap .select-wrapper+label').addClass('valid');
       $select.addClass('valid');
       $select.removeClass('invalid');
     }
+  };
+
+  const validateStateSearchNotEmpty = function(event) {
+    const $target = $(event.target);
+    const $sel = $('.state-search-wrap .select-wrapper input.select-dropdown');
+
+    if ($target.val().trim() === '') {
+      $('.state-search-wrap .select-wrapper+label').removeClass('valid');
+      $sel.addClass('invalid');
+      $sel.removeClass('valid');
+    }
+    else {
+      $('.state-search-wrap .select-wrapper+label').addClass('valid');
+      $sel.addClass('valid');
+      $sel.removeClass('invalid');
+    }
+  };
+
+  const validateRadiusNotEmpty = function (event) {
+    const $target = $(event.target);
+    const $sel = $('.radius-wrap .select-wrapper input.select-dropdown');
+
+    if ($target.val().trim() === '') {
+      $('.radius-wrap .select-wrapper+label').removeClass('valid');
+      $sel.addClass('invalid');
+      $sel.removeClass('valid');
+    }
+    else {
+      $('.radius-wrap .select-wrapper+label').addClass('valid');
+      $sel.addClass('valid');
+      $sel.removeClass('invalid');
+    }
+
   };
 
   const checkSubmit = function(event) {
@@ -368,17 +400,32 @@
   /* eslint-enable */
   $('select').material_select();
   $(window).scroll(() => {
-    $('#top').toggle($(document).scrollTop() > 300);
+    const $document = $(document);
+    const $window = $(window);
+    $('#top').toggle($document.scrollTop() > 300);
+    console.log($document.scrollTop())
+    if ($document.scrollTop() < 92 || $window.width() <= 760) {
+      console.log('nailed it!');
+    }
+
+    // $(window).scroll(function(){
+    //       $("div").css("margin-top", $(window).scrollTop())
+    // });
   });
   $('#register-user .modal-action').on('click', registerUser);
   $('#login-user .modal-action').on('click', loginUser);
   $('#submit-search').on('click', searchArtist);
-  $('#city-search, #artist-search').on('keyup', validateNotEmpty);
+  $('#city-search, #artist-search, #city').on('keyup', validateNotEmpty);
   $('body').on('keyup', checkSubmit);
-  $('#state-search').on('change', validateStateNotEmpty);
+  $('#state').on('change', validateStateNotEmpty);
+  $('#state-search').on('change', validateStateSearchNotEmpty);
+  $('#radius').on('change', validateRadiusNotEmpty);
   $('.select-wrapper input.select-dropdown').addClass('invalid');
-  $('#username-login').on('keyup', checkLoginUserName);
-  $('#password-login').on('keyup', checkLoginPassword);
+  $('#username-login, #username').on('keyup', checkLoginUserName);
+  $('#password-login, #password').on('keyup', checkLoginPassword);
+  $('#form').submit((event) => {
+    event.preventDefault();
+  });
 
 // End IFFE - Must be at bottom of file.
 })();

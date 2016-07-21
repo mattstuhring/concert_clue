@@ -3,12 +3,23 @@ html, body {
   font-family: 'Permanent Marker', cursive;
 }
 
+.favart {
+  margin-top: 0;
+  border-radius: 5px 5px 5px 5px;
+  border: 1px solid black;
+}
+
 .favart .ccauid, .collection-header {
   cursor: pointer;
 }
 
-.collection-header:hover {
-  background-color: #c62828 !important;
+.collection.with-header .collection-header:hover {
+  background-color: rgba(179,17,26,1);
+}
+
+div.card {
+  border-radius: 5px 5px 5px 5px;
+  border: 1px solid white;
 }
 
 .logo {
@@ -36,18 +47,28 @@ html, body {
 
 .hops {
   text-align: center;
-  /*padding: 10% 30% 15% 20%;*/
 	top: 0%; bottom: 0; left: 0; right: 0;
-  /*margin: 0;*/
   position: absolute;
-  /*box-sizing: padding-box;*/
   font-size: 2vw;
+}
+
+.collection.with-header .collection-header, .collection-item.avatar {
+  background-color: rgba(201,161,43,1);
+  /*background-color: rgba(179,89,17,1);*/
+}
+
+.collection.with-header .collection-header, .collection .collection-item {
+  border-bottom: 1px solid black;
 }
 
 h2 {
   margin-bottom: 20px;
   border-radius: 0 0 5px 5px;
   border: black 1px solid;
+}
+
+h2.upcoming {
+  border-radius: 5px 5px 5px 5px;
 }
 
 .search-margin {
@@ -68,6 +89,14 @@ h2 {
   margin-right: 30px;
 }
 
+.search.btn-large:hover {
+  box-shadow: 0 5px 11px 0 rgba(255, 0, 0, 0.18),0 4px 15px 0 rgba(255, 0, 0, 0.15);
+}
+
+.search.z-depth-3 {
+    box-shadow: 0 12px 15px 0 rgba(255, 0, 0, 0.3),0 17px 50px 0 rgba(255, 0, 0, 0.3);
+}
+
 nav ul a.btn {
   margin-right: 60px;
 }
@@ -77,5 +106,65 @@ nav ul a.btn {
     margin-top: 72px;
     margin-bottom: 10px;
     margin-right: 10px;
+  }
+}
+
+.hops:first-child {
+  margin-top: 25px;
+}
+
+.hops p {
+  padding-right: 125px;
+}
+
+@media only screen and (max-width: 992px) {
+  .hops p {
+    padding-right: 80px;
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+
+  .hops:first-child {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .hops p {
+    padding-right: 60px;
+    font-size: 16px;
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+
+  .hops:first-child {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .hops p {
+    padding-right: 80px;
+    font-size: 18px;
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+
+  .hops:first-child {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .hops p {
+    padding-right: 60px;
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .hops:first-child {
+    margin-top: 25px;
   }
 }

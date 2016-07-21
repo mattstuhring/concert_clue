@@ -19,7 +19,7 @@ router.post('/artist', ev(validations.post), (req, res, next) => {
 
   knex('artists')
     .select()
-    .where('name', artist)
+    .whereRaw('LOWER(name) = ?', [artist])
     .then((artists) => {
       if (artists.length > 0) {
         const err = new Error();
@@ -44,7 +44,11 @@ router.post('/artist', ev(validations.post), (req, res, next) => {
     })
     .catch((err) => {
       if (err.artist) {
-        return res.send(artist);
+        delete err.artist.id;
+        delete err.artist.created_at;
+        delete err.artist.updated_at;
+        
+        return res.send(err.artist);
       }
 
       throw err;
