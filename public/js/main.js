@@ -26,7 +26,7 @@
     for (const artist of favorites) {
       $favart.append(
         `<li class="collection-item avatar">
-          <a href="${artist.facebook_page_url}"><img
+          <a href="${artist.facebook_page_url}" target="_blank"><img
           src="${artist.thumb_url}" alt="artist pic" class="circle"></a>
           <span class="title">${artist.name}</span>
           <a class="secondary-content ccauid"
