@@ -47,7 +47,7 @@ router.post('/artist', ev(validations.post), (req, res, next) => {
         delete err.artist.id;
         delete err.artist.created_at;
         delete err.artist.updated_at;
-        
+
         return res.send(err.artist);
       }
 

@@ -2,6 +2,8 @@
 
 // eslint-disable-next-line max-statements
 (function() {
+  // eslint-disable-next-line strict
+  'use strict';
   let favorites = [];
   let events = [];
   let searchText = '';
@@ -23,6 +25,7 @@
     $favart.append(`<li class="collection-header">
     <h4>Favorite Artists</h4></li>`);
 
+    /* eslint-disable */
     for (const artist of favorites) {
       $favart.append(
         `<li class="collection-item avatar">
@@ -34,6 +37,8 @@
         </li>`
       );
     }
+
+    // eslint-enable */
   };
 
   const buildEvents = function() {

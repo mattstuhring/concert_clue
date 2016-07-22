@@ -1,6 +1,9 @@
+'use strict';
+
 // IFFE to protect global scope - Must be at top of file.
 // eslint-disable-next-line max-statements
 (function() {
+  // eslint-disable-next-line strict
   'use strict';
 
   let events = [];
@@ -81,8 +84,6 @@
       const city = ($('#city').val() || '').trim();
       const state = $('#state').val();
       const radius = Number.parseInt($('#radius').val());
-
-      /*eslint-disable */
       const newUser = {
         user_name: username,
         password,
@@ -90,7 +91,6 @@
         state,
         radius
       };
-      /*eslint-enable */
       let failed;
       const $xhr = $.ajax({
         method: 'POST',
@@ -294,7 +294,7 @@
     }
   };
 
-  const validateRadiusNotEmpty = function (event) {
+  const validateRadiusNotEmpty = function(event) {
     const $target = $(event.target);
     const $sel = $('.radius-wrap .select-wrapper input.select-dropdown');
 
@@ -308,7 +308,6 @@
       $sel.addClass('valid');
       $sel.removeClass('invalid');
     }
-
   };
 
   const checkSubmit = function(event) {
@@ -379,7 +378,6 @@
   $('.button-collapse').sideNav();
   $('.parallax').parallax();
 
-  /* eslint-disable */
   $('.modal-trigger.signup').leanModal({
     dismissible: true,
     opacity: 0.5,
@@ -397,20 +395,9 @@
     complete: closeLogin
   });
 
-  /* eslint-enable */
   $('select').material_select();
   $(window).scroll(() => {
-    const $document = $(document);
-    const $window = $(window);
-    $('#top').toggle($document.scrollTop() > 300);
-    console.log($document.scrollTop())
-    if ($document.scrollTop() < 92 || $window.width() <= 760) {
-      console.log('nailed it!');
-    }
-
-    // $(window).scroll(function(){
-    //       $("div").css("margin-top", $(window).scrollTop())
-    // });
+    $('#top').toggle($(document).scrollTop() > 300);
   });
   $('#register-user .modal-action').on('click', registerUser);
   $('#login-user .modal-action').on('click', loginUser);
