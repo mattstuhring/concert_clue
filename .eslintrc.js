@@ -5,5 +5,9 @@ module.exports = {
     'ryansobol/jquery',
     'ryansobol/node',
     'ryansobol/materialize'
-  ]
+  ],
+
+  rules: {
+    camelcase: 'off'
+  }
 };
