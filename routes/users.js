@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
+const boom = require('boom');
 const ev = require('express-validation');
 const validations = require('../validations/joiusers');
 
@@ -31,10 +32,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     .first()
     .then((exists) => {
       if (exists) {
-        const err = new Error('Username already exists');
-
-        err.status = 401;
-        throw err;
+        throw boom.create(401, 'Username already exists');
       }
 
       return bcrypt.hash(newUser.password, 12);
@@ -58,6 +56,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     });
 });
 
+// Route returns current user preferences to a logged in user.
 router.get('/users', checkAuth, (req, res, next) => {
   const userId = Number.parseInt(req.session.userId);
 
@@ -72,43 +71,47 @@ router.get('/users', checkAuth, (req, res, next) => {
     });
 });
 
-module.exports = router;
+// Req.body must contain user_name, password, city, state, and radius.
+// Route needs to be tested!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+router.patch('/users', checkAuth, ev(validations.patch), (req, res, next) => {
+  const userId = Number.parseInt(req.session.userId);
+  const userName = req.body.user_name;
+  const { password, city, state, radius } = req.body;
 
-//
-// post
-//
-// on initial search do a get request to artists
-//   if we do not have a result in the artists table
-//
-//   node get request to bandsintown for the artist
-//
-//   feed response filtered by user request fields to a searchReturnCard on the
-// logged in users screen. this card will be immediately beneeaththe search bar,
-// and will delete any prexisting searchReturnCard
-//
-//   if user clicks to add to their favorites
-//     send a post request to routes /artists/users
-//
-//   if artist doesn't exist in table {
-//     add the relevant info to the artists table
-//   }
-//
-//   then add foreign key into the artists_users table.
-//
-//   Visually .push() add the artist to the sidebar of favorites. delete
-// sidebar and rewrite sidebar.
-//
-//   rewipe the upcoming shows to ensure the new artists results are shown
-//
-// /
-//
-// delete
-//
-// on click of delete of favorite artist sidebar
-//   send a router.delete() to the artists/users route.
-//   Delete artist from artists_users table.
-//   Remove artist from favorites sidebar.
-//   refresh the upcoming shows to ensure the removed artists' concerts
-//  are no longer there.
-//
-// /
+  knex('users')
+    .where('user_name', user_name)
+    .first()
+    .then((user) => {
+      if (user) {
+        throw boom.unauthorized('Username already exists');
+      }
+
+      return knex('users')
+        .where(id, userId)
+        .update({
+          user_name: userName,
+          password,
+          city,
+          state,
+          radius
+        });
+    })
+    .then((count) => {
+      if (count === 0) {
+        throw boom.notFound('UserId not found')
+      }
+
+      return knex('users')
+        .where(id, userId)
+        .first();
+    })
+    .then((updatedUser) => {
+      delete updatedUser.hashed_password;
+      res.send(updatedUser);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+module.exports = router;

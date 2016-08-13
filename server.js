@@ -54,16 +54,9 @@ app.use((err, _req, res, _next) => {
     return res.status(err.status).json(err);
   }
 
-  if (err.status) {
+  if (err.status || err.statusCode || err.output && err.output.statusCode) {
     return res
-      .status(err.status)
-      .set('Content-Type', 'plain/text')
-      .send(err.message);
-  }
-
-  if (err.statusCode) {
-    return res
-      .status(err.statusCode)
+      .status(err.status || err.statusCode || err.output.statusCode)
       .set('Content-Type', 'plain/text')
       .send(err.message);
   }
