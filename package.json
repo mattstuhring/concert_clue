@@ -5,11 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "knex": "knex",
     "heroku-postbuild": "knex migrate:latest",
     "lint": "eslint .",
-    "nodemon": "nodemon server.js",
     "nf": "nf start"
   },
   "engines": {
@@ -48,6 +47,6 @@
   "devDependencies": {
     "dotenv": "^2.0.0",
     "foreman": "^1.4.1",
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.10.2"
   }
 }

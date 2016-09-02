@@ -189,6 +189,10 @@ div.section.parallax-container {
      color: #ee6e73;
    }
 
+   .dropdown-content.select-dropdown {
+     max-height: 200px;
+   }
+
    label.select-label {
      color: #666;
    }
