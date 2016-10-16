@@ -234,9 +234,9 @@
       const elemRect = element.getBoundingClientRect();
       const offset = elemRect.bottom - bodyRect.top;
 
-      $(window).scroll(() => {
-        $('#top').toggle($(document).scrollTop() > offset - 650);
-      });
+      // $(window).scroll(() => {
+      //   $('#top').toggle($(document).scrollTop() > offset - 650);
+      // });
     })
     .fail((err) => {
       if (err.status === 404) {
