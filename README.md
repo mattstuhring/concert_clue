@@ -1,8 +1,8 @@
 #Concert Clue: http://www.concertclue.com
 
 
-![Alt text](http://i.giphy.com/l0HlG9Cn2BTH4btnO.gif height="250" "User is not logged in.")
-![Alt text](http://i.giphy.com/l0HlT2gqktrz5HmV2.gif height="250" "Logged in user.")
+![Alt text](http://i.giphy.com/l0HlG9Cn2BTH4btnO.gif "User is not logged in.")
+![Alt text](http://i.giphy.com/l0HlT2gqktrz5HmV2.gif "Logged in user.")
 
 
 ##What problem does Concert Clue solve?
