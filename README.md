@@ -1,6 +1,6 @@
 #Concert Clue: http://www.concertclue.com
 
-<div style="margin-right: 50px;">
+<div style="margin-right: 20px; display: inline-block;">
 <img src="http://i.giphy.com/l0HlG9Cn2BTH4btnO.gif" height="250">
 </div>
 <img src="http://i.giphy.com/l0HlT2gqktrz5HmV2.gif" height="250">
