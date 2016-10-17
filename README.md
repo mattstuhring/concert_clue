@@ -1,12 +1,8 @@
 #Concert Clue: http://www.concertclue.com
-<div style="display: inline-block;">
-<div style="margin-right: 20px; display: inline-block;">
-  <img src="http://i.giphy.com/l0HlG9Cn2BTH4btnO.gif" height="250">
-</div>
-<div style="display: inline-block;">
-  <img src="http://i.giphy.com/l0HlT2gqktrz5HmV2.gif" height="250">
-</div>
-<div>
+
+
+![Alt text](http://i.giphy.com/l0HlG9Cn2BTH4btnO.gif height="250" "User is not logged in.")
+![Alt text](http://i.giphy.com/l0HlT2gqktrz5HmV2.gif height="250" "Logged in user.")
 
 
 ##What problem does Concert Clue solve?
