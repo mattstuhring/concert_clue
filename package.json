@@ -12,7 +12,7 @@
     "nf": "nf start"
   },
   "engines": {
-    "node": "6.2.2"
+    "node": "6.7.0"
   },
   "repository": {
     "type": "git",
