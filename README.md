@@ -1,6 +1,6 @@
 #Concert Clue: http://www.concertclue.com
 
-<img src="http://i.giphy.com/l0HlG9Cn2BTH4btnO.gif" height="500"><img src="http://i.giphy.com/l0HlT2gqktrz5HmV2.gif" height="500">
+<img src="http://i.giphy.com/l0HlG9Cn2BTH4btnO.gif" height="250" style=""><img src="http://i.giphy.com/l0HlT2gqktrz5HmV2.gif" height="250" style="float: right;">
 
 
 
