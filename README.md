@@ -2,6 +2,7 @@
 
 
 ![Alt text](http://i.giphy.com/l0HlG9Cn2BTH4btnO.gif "User is not logged in.")
+
 ![Alt text](http://i.giphy.com/l0HlT2gqktrz5HmV2.gif "Logged in user.")
 
 
