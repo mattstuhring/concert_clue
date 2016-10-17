@@ -1,5 +1,9 @@
 #Concert Clue: http://www.concertclue.com
 
+<img src="http://i.giphy.com/l0HlG9Cn2BTH4btnO.gif" height="500"><img src="http://i.giphy.com/l0HlT2gqktrz5HmV2.gif" height="500">
+
+
+
 ##What problem does Concert Clue solve?
 Concert Clue addresses the problem that keeping track of many different artists and their shows in your area can be difficult and time consuming.
 
@@ -14,9 +18,3 @@ Concert Clue is powered by the Bands in Town API http://www.bandsintown.com/api/
 
 ##What technologies did it use?
 The site uses a Node.js Express server, jQuery, Google's Materialize Framework, Knex.js, Joi.js, PostgreSQL, request-promise, and bcrypt-as-promised.
-
-##What was the most valuable piece of Customer feedback you received?
-Working on a team is an invaluable experience as it provides different perspectives to the development process and a better final product that incorporates those perspectives. Keeping each team member supplied with a clearly defined list of projects to complete where those mini projects fit together in a cohesive whole is a critical portion of team work.
-
-##What was the biggest challenge?
-The biggest challenge we faced was correctly identifying which routes the server would need to accommodate each feature of the site and connecting the client to those routes in an efficient manner.
