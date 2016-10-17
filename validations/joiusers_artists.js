@@ -17,6 +17,5 @@ module.exports.delete = {
       .label('ccauid')
       .integer()
       .min(1)
-      .required()
   }
 };

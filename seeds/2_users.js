@@ -13,7 +13,7 @@ exports.seed = function(knex) {
         email: 'matt@test.com',
 
         // eslint-disable-next-line max-len
-        hashed_password: '$2a$12$e1rLWAJmEOhD/6uBZ.IME.NOH3ezqu86YIClih.6UewqBRUNP/QyS',
+        hashed_password: '$2a$12$T9onmg8dSNVndtac6xVZgOgYNKpT/F1n1EyY7GSm9nRIYtB/YFiTO',
         radius: 150,
         created_at: new Date('2016-06-26 14:26:16 UTC'),
         updated_at: new Date('2016-06-26 14:26:16 UTC')

@@ -22,8 +22,7 @@
     const $favart = $('.favart');
 
     $favart.children().remove();
-    $favart.append(`<li class="collection-header center">
-    <h2>Favorite Artists</h2></li>`);
+    $favart.append(`<h2 class="collection-header center">Favorite Artists</h2>`);
 
     /* eslint-disable */
     for (const artist of favorites) {
@@ -139,6 +138,7 @@
     const $a = $(event.target).parent();
     const ccauid = Number.parseInt($a.attr('ccauid'));
     let index;
+    console.log(ccauid);
 
     for (let i = 0; i < favorites.length; i++) {
       if (favorites[i].id === ccauid) {
@@ -224,7 +224,7 @@
         <div class="card">
           <div class="row">
             <div class="col m5 s12 l4">
-              <div class="card-image">
+              <div class="card-image thumbPic">
                 <img src="${artist.thumb_url}" alt"artistPicture">
               </div>
             </div>
@@ -234,7 +234,7 @@
               </div>
               <div class="card-action">
                 <div id="fb-append" class="row">
-                  <div class="col s8">
+                  <div class="col s8 ">
                     <h5><a mbid="${artist.mbid}" band="${artist.name}" class="addFave"
                     href="#">Add to Favorites</a></h5>
                   </div>
@@ -459,6 +459,9 @@
     }
   };
 
+  $(window).scroll(() => {
+    $('#top').toggle($(document).scrollTop() > 300);
+  });
   $('.favart').on('click', '.ccauid', remFavArt);
   $('#searchbutton').click(search);
   $('.logout').on('click', logout);

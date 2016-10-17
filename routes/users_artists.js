@@ -51,7 +51,6 @@ router.get('/users/artists', checkAuth, (req, res, next) => {
 // or updates the record in the local db then adds to the
 // artists_users table then returns the artist.
 router.post('/users/artists/', checkAuth, (req, res, next) => {
-  console.log(req.body);
   const userId = req.session.userId;
   const { mbid } = req.body;
   const { name } = req.body;
@@ -64,7 +63,6 @@ router.post('/users/artists/', checkAuth, (req, res, next) => {
     .where('name', name)
     .first()
     .then((artist) => {
-      console.log(artist);
       if (artist) {
         const artistDate = new Date(artist.updated_at);
         const date = new Date();
@@ -85,7 +83,6 @@ router.post('/users/artists/', checkAuth, (req, res, next) => {
         uri: `${prefix}${name}${suffix}${appId}`,
         json: true
       }
-      console.log(options);
 
       return rp(options);
     })
@@ -174,6 +171,7 @@ router.post('/users/artists/', checkAuth, (req, res, next) => {
 router.delete('/users/artists', checkAuth, ev(val.delete), (req, res, next) => {
   const id = req.body.ccauid;
   let artist;
+  console.log(req.body.ccauid);
 
   knex('artists_users')
     .select('mbid', 'name', 'image_url', 'thumb_url', 'facebook_page_url',
@@ -181,6 +179,7 @@ router.delete('/users/artists', checkAuth, ev(val.delete), (req, res, next) => {
     .where('artists_users.id', id)
     .join('artists', 'artists_users.artist_id', 'artists.id')
     .then((deletedArtists) => {
+      console.log(deletedArtists);
       if (deletedArtists.length === 0) {
         const err = new Error();
 

@@ -5,7 +5,7 @@ html, body {
 
 .favart {
   margin-top: 0;
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 5px;
   border: 1px solid black;
   border-bottom: 10px solid rgba(201,161,43,1);
 }
@@ -14,18 +14,37 @@ html, body {
   cursor: pointer;
 }
 
+h2.favart {
+  border: 10px solid blue;
+}
+
 .collection.with-header .collection-header:hover {
   background-color: rgba(179,17,26,1);
 }
 
 .collection.with-header .collection-header {
   background-color: rgba(201,161,43,1);
+  color: black;
+}
+
+.collection-header {
+  margin: 0px;
 }
 
 .collection-header h2 {
-  color: black;
-  background-color: white;
   padding: 5px;
+}
+
+.collection-item.avatar {
+  border: 10px solid rgba(201,161,43,1);
+}
+
+.collection.with-header {
+  max-height: 700px;
+}
+
+.collection.with-header .collection-header, .collection .collection-item {
+  border-bottom: 1px solid black;
 }
 
 div.card {
@@ -43,6 +62,10 @@ div.card {
 
 .logo {
   height: 4.3rem;
+}
+
+.thumbPic {
+  margin-top: 20px;
 }
 
 .pattern {
@@ -70,15 +93,6 @@ div.card {
 	top: 0%; bottom: 0; left: 0; right: 0;
   position: absolute;
   font-size: 2vw;
-}
-
-/*background-color: rgba(201,161,43,1);*/
-.collection-item.avatar {
-  border: 10px solid rgba(201,161,43,1);
-}
-
-.collection.with-header .collection-header, .collection .collection-item {
-  border-bottom: 1px solid black;
 }
 
 h2 {
@@ -196,4 +210,5 @@ nav ul a.btn {
   bottom: -120px;
   width:100%;
   z-index:300;
+  display:none;
 }
