@@ -7,6 +7,7 @@ html, body {
   margin-top: 0;
   border-radius: 5px 5px 5px 5px;
   border: 1px solid black;
+  border-bottom: 10px solid rgba(201,161,43,1);
 }
 
 .favart .ccauid, .collection-header {
@@ -17,19 +18,38 @@ html, body {
   background-color: rgba(179,17,26,1);
 }
 
+.collection.with-header .collection-header {
+  background-color: rgba(201,161,43,1);
+}
+
+.collection-header h2 {
+  color: black;
+  background-color: white;
+  padding: 5px;
+}
+
 div.card {
   border-radius: 5px 5px 5px 5px;
   border: 1px solid white;
+}
+
+.h1card {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-radius: 5px;
 }
 
 .logo {
   height: 4.3rem;
 }
 
-.img {
+.pattern {
   background-image: url('../assets/images/crowd_header.jpg');
   background-size: contain;
   border: 1px solid black;
+  padding-bottom: 40px;
 }
 
 .barley {
@@ -52,9 +72,9 @@ div.card {
   font-size: 2vw;
 }
 
-.collection.with-header .collection-header, .collection-item.avatar {
-  background-color: rgba(201,161,43,1);
-  /*background-color: rgba(179,89,17,1);*/
+/*background-color: rgba(201,161,43,1);*/
+.collection-item.avatar {
+  border: 10px solid rgba(201,161,43,1);
 }
 
 .collection.with-header .collection-header, .collection .collection-item {
@@ -75,7 +95,9 @@ h2.upcoming {
   margin-bottom: 0;
   border-radius: 5px 5px 0 0;
 }
-
+.searchResponseCard {
+  margin-bottom: 35px;
+}
 .artist-bar {
   margin-top: 0;
 }
@@ -167,4 +189,11 @@ nav ul a.btn {
   .hops:first-child {
     margin-top: 25px;
   }
+}
+
+.page-footer {
+  position: fixed;
+  bottom: -120px;
+  width:100%;
+  z-index:300;
 }

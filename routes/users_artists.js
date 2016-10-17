@@ -10,7 +10,8 @@ const val = require('../validations/joiusers_artists');
 const rp = require('request-promise');
 
 const appId = 'CHADTEST';
-const prefix = 'http://api.bandsintown.com/artists/mbid_';
+// const prefix = 'http://api.bandsintown.com/artists/mbid_';
+const prefix = 'http://api.bandsintown.com/artists/';
 const suffix = '?api_version=2.0&format=json&app_id=';
 
 const checkAuth = function(req, res, next) {
@@ -49,17 +50,21 @@ router.get('/users/artists', checkAuth, (req, res, next) => {
 // route returns the local db copy. Otherwise it queries bandsintown and inserts
 // or updates the record in the local db then adds to the
 // artists_users table then returns the artist.
-router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
+router.post('/users/artists/', checkAuth, (req, res, next) => {
+  console.log(req.body);
   const userId = req.session.userId;
   const { mbid } = req.body;
+  const { name } = req.body;
   let updateArtistId;
   let artistResult;
 
+
   knex('artists')
     .select()
-    .where('mbid', mbid)
+    .where('name', name)
     .first()
     .then((artist) => {
+      console.log(artist);
       if (artist) {
         const artistDate = new Date(artist.updated_at);
         const date = new Date();
@@ -77,9 +82,10 @@ router.post('/users/artists/', checkAuth, ev(val.post), (req, res, next) => {
       }
 
       const options = {
-        uri: `${prefix}${mbid}${suffix}${appId}`,
+        uri: `${prefix}${name}${suffix}${appId}`,
         json: true
-      };
+      }
+      console.log(options);
 
       return rp(options);
     })

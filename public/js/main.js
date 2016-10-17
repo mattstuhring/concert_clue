@@ -22,8 +22,8 @@
     const $favart = $('.favart');
 
     $favart.children().remove();
-    $favart.append(`<li class="collection-header">
-    <h4>Favorite Artists</h4></li>`);
+    $favart.append(`<li class="collection-header center">
+    <h2>Favorite Artists</h2></li>`);
 
     /* eslint-disable */
     for (const artist of favorites) {
@@ -220,7 +220,7 @@
 
     $searchResponseCard.children().remove();
     $searchResponseCard.append(
-      `<div class="col s12 l10">
+      `<div class="col s12 l10 offset-l1">
         <div class="card">
           <div class="row">
             <div class="col m5 s12 l4">
@@ -235,7 +235,7 @@
               <div class="card-action">
                 <div id="fb-append" class="row">
                   <div class="col s8">
-                    <h5><a mbid="${artist.mbid}" class="addFave"
+                    <h5><a mbid="${artist.mbid}" band="${artist.name}" class="addFave"
                     href="#">Add to Favorites</a></h5>
                   </div>
                 </div>
@@ -247,7 +247,7 @@
     );
     if (artist.facebook_page_url) {
       $('#fb-append').append(`
-        <div class="col s4">
+        <div>
           <a href="${artist.facebook_page_url}" target="_blank"><img
           src="/assets/images/fb30.png" alt="Facebook image"></a>
         </div>`
@@ -342,7 +342,8 @@
       url: '/users/artists',
       contentType: 'application/json',
       data: JSON.stringify({
-        mbid: $(event.target).attr('mbid')
+        mbid: $(event.target).attr('mbid'),
+        name: $(event.target).attr('band')
       })
     })
     .done((artist) => {
